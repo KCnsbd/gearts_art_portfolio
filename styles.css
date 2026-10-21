@@ -1,0 +1,33 @@
+:root {
+    /* CSS HEX */
+    --rose-wine: #bc4377ff;
+    --strawberry-red: #fd444eff;
+    --tangerine-dream: #fdac7cff;
+    --soft-blush: #ffe5dbff;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav{
+    list-style-type: none;
+}
+
+#home{
+    background-image: url("assets/home-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100dvh;
+}
+
+#about{
+    background-color: var(--rose-wine);
+}
+
+#gallery{
+    background-color: var(--tangerine-dream);
+}
