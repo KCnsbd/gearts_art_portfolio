@@ -6,28 +6,209 @@
     --soft-blush: #ffe5dbff;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-nav{
-    list-style-type: none;
+/* Enable smooth scrolling and offset the fixed navbar so it doesn't cover section titles */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem; 
 }
 
-#home{
+body {
+    font-family: 'Quicksand', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Headings - Fun and Pretty Font */
+h1, h2, h3 {
+    font-family: 'Righteous', cursive;
+    letter-spacing: 1px;
+}
+
+/* Navigation - Fixed & Gradient */
+header {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 1.5rem 0 3rem 0;
+    position: fixed; 
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--tangerine-dream);
+}
+
+/* Sections General - Ensures every section is at least screen height and centered vertically */
+section {
+    padding: 6rem 2rem 4rem 2rem; 
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Home Section */
+#home {
     background-image: url("assets/home-bg.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100dvh;
+    align-items: center; /* Horizontally centers the box */
+    text-align: center;
+    color: white;
 }
 
-#about{
+.home-content {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 3rem;
+    border-radius: 15px;
+    max-width: 700px;
+}
+
+.main-title {
+    font-size: 4.5rem; 
+    color: var(--tangerine-dream);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.subtitle {
+    font-size: 1.5rem; 
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--soft-blush);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* About Section */
+#about {
     background-color: var(--rose-wine);
+    color: #333;
 }
 
-#gallery{
+#about h2 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    align-items: stretch; 
+    gap: 2rem;
+    flex-wrap: wrap; 
+}
+
+/* Card Styling */
+.card {
+    background-color: var(--soft-blush);
+    border-radius: 20px;
+    padding: 2rem;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Rounded Rectangle Profile Picture */
+.profile-picture {
+    padding: 0; 
+    overflow: hidden;
+    background: none;
+    box-shadow: none;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.extra-info h3 {
+    color: var(--rose-wine);
+    margin-bottom: 0.5rem;
+}
+
+.social-links ul, .mediums ul {
+    list-style-type: none;
+    margin-bottom: 1.5rem;
+}
+
+.social-links a {
+    color: var(--strawberry-red);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+/* Gallery Section */
+#gallery {
     background-color: var(--tangerine-dream);
+    text-align: center;
+    color: white;
+}
+
+#gallery h2 {
+    font-size: 3rem;
+}
+
+.artwork {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #111;
+    color: var(--soft-blush);
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+    }
+    .main-title {
+        font-size: 3rem;
+    }
 }

@@ -1,60 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GEARTS+ Art Portfolio</title>
-        <link rel="stylesheet" href="styles.css">
-        <script src="script.js" defer></script>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                </ul>
-            </nav>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEARTS+ Art Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Importing Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Righteous&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <main>
-            <section id="home">
-                <h2>KAYECEEH Art Portfolio</h2>
-                <p>Discover a collection of my artwork, ranging from digital illustrations to traditional paintings. Each piece reflects my passion for creativity and expression.</p>
-            </section>
-            <section id="about">
-                <div class="profile-picture">
-                    <img src="images/profile.jpg" alt="Profile Picture of Keana Consebido">
+    <main>
+        <!-- HOME SECTION -->
+        <section id="home">
+            <div class="home-content">
+                <h1 class="main-title">KAYECEEH</h1>
+                <h2 class="subtitle">Art Portfolio</h2>
+                <p>In Partial Fulfillment of the Requirements for the Course Arts Appreciation</p>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="about-container">
+                <!-- Card 1: Image -->
+                <div class="card profile-picture">
+                    <img src="assets/profile.jpg" alt="Profile Picture of Keana Consebido">
                 </div>
-                <dive class="about-text">
-                <h2>Hello!</h2>
-                <h3>I'm Keana Consebido</h3>
-                <p>Welcome to my art portfolio! I'm Keana Consebido, a passionate artist and a 4th year Computer Science student. I go by KayeCeeh online as my artist name. Art has been a significant part of my life for as long as I can remember, and I'm excited to share my creations with you.</p>
+                
+                <!-- Card 2: Bio -->
+                <div class="card about-text">
+                    <h2>Hello!</h2>
+                    <h3>I'm Keana Consebido</h3>
+                    <p>Welcome to my art portfolio! I'm Keana Consebido, a passionate artist and a 4th year Computer Science student. I go by KayeCeeh online as my artist name. Art has been a significant part of my life for as long as I can remember, and I'm excited to share my creations with you.</p>
                 </div>
-                <div class="social-links">
-                    <h3>CONTACT</h3>
-                    <ul>
-                        <li><a href="https://www.instagram.com/kaye.ceeh/" target="_blank">Instagram</a></li>
-                <div class="mediums">
-                    <h3>Mediums I Work With:</h3>
-                    <ul>
-                        <li>Digital Art</li>
-                        <li>Traditional Art</li>
-                        <li>Mixed Media</li>
-                    </ul>
-            </section>
 
-            <section id="gallery">
-                <h2>Gallery</h2>
-                <div class="artwork">
-                    <!-- Artwork items will be dynamically loaded here -->
+                <!-- Card 3: Info -->
+                <div class="card extra-info">
+                    <div class="social-links">
+                        <h3>CONTACT</h3>
+                        <ul>
+                            <li><a href="https://www.instagram.com/kaye.ceeh/" target="_blank">Instagram</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mediums">
+                        <h3>Mediums I Work With:</h3>
+                        <ul>
+                            <li>Digital Art</li>
+                            <li>Traditional Art</li>
+                            <li>Mixed Media</li>
+                        </ul>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-        </main>
+        <!-- GALLERY SECTION -->
+        <section id="gallery">
+            <h2>Gallery</h2>
+            <div class="artwork">
+                <!-- Artwork items will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
 
-        <footer>
-            <p>&copy; 2026 GEARTS+. All rights reserved.</p>
-        </footer>
+    <footer>
+        <p>&copy; 2026 GEARTS+. All rights reserved.</p>
+    </footer>
+</body>
 </html>
