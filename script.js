@@ -143,7 +143,7 @@ function renderGallery() {
             caption.textContent = artwork.title;
             const mediumTag = document.createElement("span");
             mediumTag.className = "medium-tag";
-            mediumTag.textContent = `{artwork.medium}`;
+            mediumTag.textContent = `${artwork.medium}`;
             const indicator = document.createElement("span");
             indicator.className = "card-arrow";
             indicator.setAttribute("aria-hidden", "true");
