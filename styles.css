@@ -151,7 +151,7 @@ button { font: inherit; }
 }
 .artwork-card:hover, .artwork-card:focus-visible { transform: translateY(-4px); box-shadow: var(--shadow); outline: 2px solid var(--berry); outline-offset: 2px; }
 .artwork-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: .8rem; background: var(--blush); }
-.artwork-card figcaption { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .9rem .4rem .35rem; color: var(--rose-wine); font: 1.22rem 'Righteous', cursive; }
+.artwork-card figcaption, .artwork-card-caption { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .9rem .4rem .35rem; color: var(--rose-wine); font: 1.22rem 'Righteous', cursive; }
 .artwork-card figcaption span { color: var(--berry); font: 700 .78rem 'Quicksand', sans-serif; }
 footer { padding: 2rem 1.5rem; color: rgba(255,255,255,.8); background: #30232b; text-align: center; }
 .footer-brand { color: #ffd4b7; font-size: 1.1rem; text-decoration: none; }
