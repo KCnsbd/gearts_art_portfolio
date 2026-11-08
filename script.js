@@ -1,67 +1,190 @@
 const artworks = [
     {
-        id: "act-1",
-        src: "assets/act1.jpg",
-        title: "Act 1",
-        description: "An artwork from Act 1 of my GEARTS+ portfolio. The appendix shows the full artwork.",
-        appendixSrc: "assets/act1.jpg",
+        id: "beauty-is-balance",
+        group: "classwork",
+        src: "assets/class-work/beauty is balance.jpg",
+        title: "Beauty Is Balance",
+        description: "A GEARTS+ classwork piece exploring beauty through balance."
+    },
+    {
+        id: "researcher-above-the-sea-of-ash",
+        group: "classwork",
+        src: "assets/class-work/Researcher Above the Sea of Ash.jpg",
+        title: "Researcher Above the Sea of Ash",
+        description: "A GEARTS+ classwork piece."
+    },
+    {
+        id: "validation",
+        group: "classwork",
+        src: "assets/class-work/VALIDATION YESSSSS.png",
+        title: "Validation",
+        description: "A GEARTS+ classwork piece."
+    },
+    {
+        id: "earth-yearns",
+        group: "classwork",
+        src: "assets/class-work/the-earth-yearns-for-the-heavens.jpg",
+        title: "The Earth Yearns for the Heavens",
+        description: "A GEARTS+ classwork piece."
+    },
+    {
+        id: "wonder",
+        group: "classwork",
+        src: "assets/class-work/wonder.mp4",
+        title: "Wonder",
+        description: "A GEARTS+ classwork video."
+    },
+    {
+        id: "bj",
+        group: "exploration",
+        src: "assets/art-exploration/BJ.jpeg",
+        title: "BJ",
+        description: "An art exploration from my personal creative practice.",
         appendixDescription: "Full artwork view."
     },
     {
-        id: "act-2",
-        src: "assets/act2.png",
-        title: "Act 2",
-        description: "An artwork from Act 2 of my GEARTS+ portfolio. The appendix shows the full artwork.",
-        appendixSrc: "assets/act2.png",
+        id: "felt-doll",
+        group: "exploration",
+        src: "assets/art-exploration/Felt Doll.jpg",
+        title: "Felt Doll",
+        description: "A handmade felt doll created as an art exploration.",
         appendixDescription: "Full artwork view."
     },
     {
-        id: "act-3",
-        src: "assets/act3.jpg",
-        title: "Act 3",
-        description: "An artwork from Act 3 of my GEARTS+ portfolio. The appendix shows the full artwork.",
-        appendixSrc: "assets/act3.jpg",
-        appendixDescription: "Full artwork view."
+        id: "we-were-just-children",
+        group: "exploration",
+        src: "assets/art-exploration/We Were Just Children.mp4",
+        title: "We Were Just Children",
+        description: "A video art exploration inspired by the contrast between childhood innocence and a cruel fate.",
+        appendixDescription: "Full video."
     },
     {
-        id: "act-4",
-        src: "assets/act4.jpg",
-        title: "Act 4",
-        description: "An artwork from Act 4 of my GEARTS+ portfolio. The appendix shows the full artwork.",
-        appendixSrc: "assets/act4.jpg",
+        id: "sandbearer",
+        group: "exploration",
+        src: "assets/art-exploration/Where the Sandbearer Meets the Sun.png",
+        title: "Where the Sandbearer Meets the Sun",
+        description: "An art exploration from my personal creative practice.",
         appendixDescription: "Full artwork view."
     }
 ];
 
-const gallery = document.querySelector(".artwork");
+const gallery = document.querySelector(".gallery-groups");
 const artModal = document.getElementById("art-modal");
 const appendixModal = document.getElementById("appendix-modal");
 const modalContent = document.getElementById("modal-content");
 let activeArtwork = null;
 let lastFocusedElement = null;
 
+function createMedia(src, title, className, controls = false) {
+    const isVideo = /\.mp4(?:$|\?)/i.test(src);
+    const media = document.createElement(isVideo ? "video" : "img");
+    media.className = className;
+    if (isVideo) {
+        media.src = src;
+        media.controls = controls;
+        media.playsInline = true;
+        media.preload = controls ? "metadata" : "none";
+        if (!controls) {
+            media.muted = true;
+            media.loop = true;
+            media.autoplay = true;
+            media.setAttribute("aria-label", `Preview video: ${title}`);
+        }
+    } else {
+        media.src = src;
+        media.alt = title;
+        media.loading = controls ? "eager" : "lazy";
+    }
+    return media;
+}
+
+function renderGallery() {
+    if (!gallery) return;
+    const sections = [
+        { key: "classwork", title: "Classwork", note: "Pieces created for GEARTS+ activities." },
+        { key: "exploration", title: "Art Exploration", note: "Personal pieces and experiments beyond class assignments." }
+    ];
+
+    sections.forEach(({ key, title, note }) => {
+        const group = document.createElement("section");
+        group.className = `gallery-group gallery-group-${key}`;
+        group.setAttribute("aria-labelledby", `gallery-${key}-title`);
+
+        const heading = document.createElement("div");
+        heading.className = "gallery-group-heading";
+        const h3 = document.createElement("h3");
+        h3.id = `gallery-${key}-title`;
+        h3.textContent = title;
+        const p = document.createElement("p");
+        p.textContent = note;
+        heading.append(h3, p);
+
+        const grid = document.createElement("div");
+        grid.className = "artwork-grid";
+        artworks.filter((artwork) => artwork.group === key).forEach((artwork) => {
+            const card = document.createElement("button");
+            card.type = "button";
+            card.className = "artwork-card";
+            card.setAttribute("aria-label", `View ${artwork.title} details`);
+            const mediaWrap = document.createElement("span");
+            mediaWrap.className = "artwork-media-wrap";
+            mediaWrap.append(createMedia(artwork.src, artwork.title, "artwork-media"));
+            const caption = document.createElement("span");
+            caption.className = "artwork-card-caption";
+            caption.textContent = artwork.title;
+            const indicator = document.createElement("span");
+            indicator.className = "card-arrow";
+            indicator.setAttribute("aria-hidden", "true");
+            indicator.textContent = "↗";
+            card.append(mediaWrap, caption, indicator);
+            card.addEventListener("click", () => openArtwork(artwork.id, card));
+            grid.append(card);
+        });
+
+        group.append(heading, grid);
+        gallery.append(group);
+    });
+}
+
 function openArtwork(id, trigger) {
     const artwork = artworks.find((item) => item.id === id);
     if (!artwork) return;
-
     activeArtwork = artwork;
     lastFocusedElement = trigger || document.activeElement;
-    modalContent.innerHTML = `
-        <button class="modal-close" type="button" aria-label="Close artwork details">×</button>
-        <img class="modal-artwork" src="${artwork.src}" alt="${artwork.title}">
-        <div class="modal-copy">
-            <p class="eyebrow">GEARTS+ ARTWORK</p>
-            <h2 id="modal-title">${artwork.title}</h2>
-            <p>${artwork.description}</p>
-            <button class="appendix-button" type="button">
-                <span aria-hidden="true">▧</span> View Appendix
-            </button>
-        </div>
-    `;
+    modalContent.replaceChildren();
 
+    const close = document.createElement("button");
+    close.className = "modal-close";
+    close.type = "button";
+    close.setAttribute("aria-label", "Close artwork details");
+    close.textContent = "×";
+    modalContent.append(close);
+    modalContent.append(createMedia(artwork.src, artwork.title, "modal-artwork", true));
+
+    const copy = document.createElement("div");
+    copy.className = "modal-copy";
+    const eyebrow = document.createElement("p");
+    eyebrow.className = "eyebrow";
+    eyebrow.textContent = artwork.group === "classwork" ? "GEARTS+ CLASSWORK" : "ART EXPLORATION";
+    const heading = document.createElement("h2");
+    heading.id = "modal-title";
+    heading.textContent = artwork.title;
+    const description = document.createElement("p");
+    description.textContent = artwork.description;
+    copy.append(eyebrow, heading, description);
+
+    if (artwork.group === "exploration") {
+        const appendixButton = document.createElement("button");
+        appendixButton.className = "appendix-button";
+        appendixButton.type = "button";
+        appendixButton.innerHTML = '<span aria-hidden="true">▧</span> View Appendix';
+        appendixButton.addEventListener("click", openAppendix);
+        copy.append(appendixButton);
+    }
+    modalContent.append(copy);
     artModal.hidden = false;
     document.body.classList.add("modal-active");
-    artModal.querySelector(".modal-close").focus();
+    close.focus();
 }
 
 function closeArtwork() {
@@ -71,13 +194,11 @@ function closeArtwork() {
 }
 
 function openAppendix() {
-    if (!activeArtwork) return;
+    if (!activeArtwork || activeArtwork.group !== "exploration") return;
     document.getElementById("appendix-title").textContent = activeArtwork.title;
-    const image = document.getElementById("appendix-image");
-    image.src = activeArtwork.appendixSrc || activeArtwork.src;
-    image.alt = `Appendix image for ${activeArtwork.title}`;
-    document.getElementById("appendix-description").textContent =
-        activeArtwork.appendixDescription || "Full artwork view.";
+    const mediaContainer = document.getElementById("appendix-media");
+    mediaContainer.replaceChildren(createMedia(activeArtwork.src, activeArtwork.title, "appendix-artwork", true));
+    document.getElementById("appendix-description").textContent = activeArtwork.appendixDescription || "Full artwork view.";
     appendixModal.hidden = false;
     appendixModal.querySelector(".modal-close").focus();
 }
@@ -88,48 +209,28 @@ function closeAppendix() {
     else artModal.querySelector(".appendix-button")?.focus();
 }
 
-if (gallery) {
-    artworks.forEach(({ id, src, title }) => {
-        const card = document.createElement("button");
-        card.type = "button";
-        card.className = "artwork-card";
-        card.setAttribute("aria-label", `View ${title} details`);
-        card.innerHTML = `
-            <img src="${src}" alt="" loading="lazy">
-            <span class="artwork-card-caption">${title}</span>
-        `;
-        card.addEventListener("click", () => openArtwork(id, card));
-        gallery.append(card);
-    });
-}
+renderGallery();
 
 const menuToggle = document.querySelector(".menu-toggle");
 const navigation = document.getElementById("primary-navigation");
-
 menuToggle?.addEventListener("click", () => {
     const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
     menuToggle.setAttribute("aria-expanded", String(!isOpen));
     menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
     navigation?.classList.toggle("is-open", !isOpen);
 });
-
-navigation?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-        menuToggle?.setAttribute("aria-expanded", "false");
-        menuToggle?.setAttribute("aria-label", "Open navigation menu");
-        navigation.classList.remove("is-open");
-    });
-});
+navigation?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+    menuToggle?.setAttribute("aria-expanded", "false");
+    menuToggle?.setAttribute("aria-label", "Open navigation menu");
+    navigation.classList.remove("is-open");
+}));
 
 artModal?.addEventListener("click", (event) => {
     if (event.target === artModal || event.target.closest(".modal-close")) closeArtwork();
-    if (event.target.closest(".appendix-button")) openAppendix();
 });
-
 appendixModal?.addEventListener("click", (event) => {
     if (event.target === appendixModal || event.target.closest(".modal-close")) closeAppendix();
 });
-
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
         if (!appendixModal.hidden) closeAppendix();
