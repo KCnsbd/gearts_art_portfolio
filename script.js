@@ -4,42 +4,48 @@ const artworks = [
         group: "classwork",
         src: "assets/class-work/beauty is balance.jpg",
         title: "Beauty Is Balance",
-        description: "A GEARTS+ classwork piece exploring beauty through balance."
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Add medium"
     },
     {
         id: "researcher-above-the-sea-of-ash",
         group: "classwork",
         src: "assets/class-work/Researcher Above the Sea of Ash.jpg",
         title: "Researcher Above the Sea of Ash",
-        description: "A GEARTS+ classwork piece."
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Add medium"
     },
     {
         id: "validation",
         group: "classwork",
         src: "assets/class-work/VALIDATION YESSSSS.png",
         title: "Validation",
-        description: "A GEARTS+ classwork piece."
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Add medium"
     },
     {
         id: "earth-yearns",
         group: "classwork",
         src: "assets/class-work/the-earth-yearns-for-the-heavens.jpg",
         title: "The Earth Yearns for the Heavens",
-        description: "A GEARTS+ classwork piece."
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Add medium"
     },
     {
         id: "wonder",
         group: "classwork",
         src: "assets/class-work/wonder.mp4",
         title: "Wonder",
-        description: "A GEARTS+ classwork video."
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Add medium"
     },
     {
         id: "bj",
         group: "exploration",
         src: "assets/art-exploration/BJ.jpeg",
         title: "BJ",
-        description: "An art exploration from my personal creative practice.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Add medium",
         appendixDescription: "Full artwork view."
     },
     {
@@ -47,7 +53,8 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/Felt Doll.jpg",
         title: "Felt Doll",
-        description: "A handmade felt doll created as an art exploration.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Add medium",
         appendixDescription: "Full artwork view."
     },
     {
@@ -55,7 +62,8 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/We Were Just Children.mp4",
         title: "We Were Just Children",
-        description: "A video art exploration inspired by the contrast between childhood innocence and a cruel fate.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Add medium",
         appendixDescription: "Full video."
     },
     {
@@ -63,7 +71,8 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/Where the Sandbearer Meets the Sun.png",
         title: "Where the Sandbearer Meets the Sun",
-        description: "An art exploration from my personal creative practice.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Add medium",
         appendixDescription: "Full artwork view."
     }
 ];
@@ -132,11 +141,14 @@ function renderGallery() {
             const caption = document.createElement("span");
             caption.className = "artwork-card-caption";
             caption.textContent = artwork.title;
+            const mediumTag = document.createElement("span");
+            mediumTag.className = "medium-tag";
+            mediumTag.textContent = `Medium: ${artwork.medium}`;
             const indicator = document.createElement("span");
             indicator.className = "card-arrow";
             indicator.setAttribute("aria-hidden", "true");
             indicator.textContent = "↗";
-            card.append(mediaWrap, caption, indicator);
+            card.append(mediaWrap, caption, mediumTag, indicator);
             card.addEventListener("click", () => openArtwork(artwork.id, card));
             grid.append(card);
         });
