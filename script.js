@@ -5,7 +5,7 @@ const artworks = [
         src: "assets/class-work/beauty is balance.jpg",
         title: "Beauty Is Balance",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Add medium"
+        medium: "Nature Art"
     },
     {
         id: "researcher-above-the-sea-of-ash",
@@ -13,15 +13,15 @@ const artworks = [
         src: "assets/class-work/Researcher Above the Sea of Ash.jpg",
         title: "Researcher Above the Sea of Ash",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Add medium"
+        medium: "AI Appropriation"
     },
     {
         id: "validation",
         group: "classwork",
         src: "assets/class-work/VALIDATION YESSSSS.png",
-        title: "Validation",
+        title: "VALIDATION YASSSS",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Add medium"
+        medium: "Meme"
     },
     {
         id: "earth-yearns",
@@ -29,7 +29,7 @@ const artworks = [
         src: "assets/class-work/the-earth-yearns-for-the-heavens.jpg",
         title: "The Earth Yearns for the Heavens",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Add medium"
+        medium: "Acrylic Painting"
     },
     {
         id: "wonder",
@@ -37,7 +37,7 @@ const artworks = [
         src: "assets/class-work/wonder.mp4",
         title: "Wonder",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Add medium"
+        medium: "Videography"
     },
     {
         id: "bj",
@@ -45,16 +45,16 @@ const artworks = [
         src: "assets/art-exploration/BJ.jpeg",
         title: "BJ",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Add medium",
+        medium: "Felt Craft",
         appendixDescription: "Full artwork view."
     },
     {
         id: "felt-doll",
         group: "exploration",
         src: "assets/art-exploration/Felt Doll.jpg",
-        title: "Felt Doll",
+        title: "My Love Language",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Add medium",
+        medium: "Felt Craft",
         appendixDescription: "Full artwork view."
     },
     {
@@ -63,7 +63,7 @@ const artworks = [
         src: "assets/art-exploration/We Were Just Children.mp4",
         title: "We Were Just Children",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Add medium",
+        medium: "Digital Animation",
         appendixDescription: "Full video."
     },
     {
@@ -72,7 +72,7 @@ const artworks = [
         src: "assets/art-exploration/Where the Sandbearer Meets the Sun.png",
         title: "Where the Sandbearer Meets the Sun",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Add medium",
+        medium: "Digital Illustration",
         appendixDescription: "Full artwork view."
     }
 ];
@@ -143,7 +143,7 @@ function renderGallery() {
             caption.textContent = artwork.title;
             const mediumTag = document.createElement("span");
             mediumTag.className = "medium-tag";
-            mediumTag.textContent = `Medium: ${artwork.medium}`;
+            mediumTag.textContent = `{artwork.medium}`;
             const indicator = document.createElement("span");
             indicator.className = "card-arrow";
             indicator.setAttribute("aria-hidden", "true");
