@@ -211,4 +211,27 @@ footer {
     .main-title {
         font-size: 3rem;
     }
+
+.artwork-card {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--soft-blush);
+    color: #333;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.artwork-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.artwork-card figcaption {
+    padding: 0.9rem 1rem 1rem;
+    color: var(--rose-wine);
+    font-family: 'Righteous', cursive;
+    font-size: 1.15rem;
+}
 }
