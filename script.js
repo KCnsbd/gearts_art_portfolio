@@ -150,7 +150,7 @@ function renderGallery() {
 
             const medium = document.createElement("p");
             medium.className = "medium-text";
-            medium.textContent = `Medium: ${artwork.medium}`;
+            medium.textContent = `${artwork.medium}`;
 
             const description = document.createElement("p");
             description.className = "card-description";
@@ -191,7 +191,7 @@ function renderAppendix() {
 
         const medium = document.createElement("p");
         medium.className = "medium-text";
-        medium.textContent = `Medium: ${artwork.medium}`;
+        medium.textContent = `${artwork.medium}`;
 
         const description = document.createElement("p");
         description.textContent = artwork.description;
@@ -281,7 +281,7 @@ function openAppendixModal(id, trigger, fromArtworkModal = false) {
 
     const medium = document.createElement("p");
     medium.className = "medium-text";
-    medium.textContent = `Medium: ${artwork.medium}`;
+    medium.textContent = `${artwork.medium}`;
 
     const media = createMedia(artwork.src, artwork.title, "modal-artwork", true);
     const description = document.createElement("p");
