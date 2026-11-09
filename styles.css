@@ -229,21 +229,21 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 
 
 /* Reorder the portrait and contents list in the About layout. */
-.about-container { grid-template-areas: "contents bio portrait"; }
+.about-container { grid-template-areas: "portrait bio contents"; }
 .contents-nav { grid-area: contents; }
 .about-text { grid-area: bio; }
 .about-photo-wrap { grid-area: portrait; }
 @media (max-width: 850px) {
     .about-container {
         grid-template-columns: minmax(0, 1fr) minmax(180px, .85fr);
-        grid-template-areas: "contents portrait" "bio bio";
+        grid-template-areas: "portrait contents" "bio bio";
     }
     .contents-nav { grid-column: auto; }
 }
 @media (max-width: 760px) {
     .about-container {
         grid-template-columns: 1fr;
-        grid-template-areas: "contents" "portrait" "bio";
+        grid-template-areas: "portrait" "bio" "contents";
     }
 }
 
