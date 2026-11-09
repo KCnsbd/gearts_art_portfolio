@@ -44,7 +44,8 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/BJ.jpeg",
         title: "BJ",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "A hand-sewn Snorlax felt charm made as a birthday gift for a friend. Every detail, including the face and initials, was sewn by hand without glue.",
+        dateLabel: "Created: November 2, 2026",
         medium: "Felt Craft",
         appendices: [
             { src: "assets/art-exploration/appendix/feltcrafts/materials.jpg", title: "Materials" },
@@ -57,7 +58,8 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/Felt Doll.jpg",
         title: "My Love Language",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "A handmade felt doll for my sister’s birthday, created to turn a familiar digital gift into a new kind of handmade keepsake.",
+        dateLabel: "Created: November 3, 2026",
         medium: "Felt Craft",
         appendices: [
             { src: "assets/art-exploration/appendix/feltcrafts/document_6307514053791064889.mp4", title: "Timelapse" }
@@ -68,7 +70,8 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/We Were Just Children.mp4",
         title: "We Were Just Children",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "A 16-second frame-by-frame animation inspired by Peruere and Clervie’s story in Genshin Impact. It contrasts their childhood innocence with the tragic fate waiting for them.",
+        dateLabel: "Created: October 13–15, 2026",
         medium: "Digital Animation",
         appendices: [
             { src: "assets/art-exploration/appendix/children(layers).mp4", title: "Layer Recording" }
@@ -80,7 +83,8 @@ const artworks = [
         src: "assets/art-exploration/Where the Sandbearer Meets the Sun.png",
         appendixPreview: "assets/art-exploration/appendix/sandbearer-og-ss.png",
         title: "Where the Sandbearer Meets the Sun",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "A 2023 landscape painting revamped in 2026. Returning to the piece let me see how my approach to contrast, value, lighting, and shadow had developed.",
+        dateLabel: "Created: December 27, 2023 · Revamped: September 23, 2026",
         medium: "Digital Illustration",
         appendices: [
             { src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun(og).clip", title: "Original Clip Studio file", download: true },
@@ -100,7 +104,8 @@ const artworks = [
             "assets/art-exploration/A Quiet Corner of Stories/4.jpg"
         ],
         title: "A Quiet Corner of Stories",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "A set of photographs taken at Paperback & Lattes, capturing the café’s vintage, dark-academia atmosphere during a birthday visit with my sister.",
+        dateLabel: "Taken: November 3, 2026",
         medium: "Photography",
         appendices: [
             { src: "assets/art-exploration/appendix/photography/raw1.jpg", title: "Original photo · 1" },
@@ -201,6 +206,14 @@ function createPhotoSlideshow(photos, title, className, interactive = false) {
     return slideshow;
 }
 
+function createDateLabel(artwork) {
+    if (!artwork.dateLabel) return null;
+    const date = document.createElement("p");
+    date.className = "artwork-date";
+    date.textContent = artwork.dateLabel;
+    return date;
+}
+
 function renderGallery() {
     if (!gallery) return;
     const sections = [
@@ -243,6 +256,7 @@ function renderGallery() {
             const medium = document.createElement("p");
             medium.className = "medium-text";
             medium.textContent = `${artwork.medium}`;
+            const date = createDateLabel(artwork);
 
             const description = document.createElement("p");
             description.className = "card-description";
@@ -253,7 +267,9 @@ function renderGallery() {
             readMore.textContent = "Read more ↗";
             readMore.setAttribute("aria-hidden", "true");
 
-            card.append(mediaWrap, caption, medium, description, readMore);
+            card.append(mediaWrap, caption, medium);
+            if (date) card.append(date);
+            card.append(description, readMore);
             card.addEventListener("click", () => openArtwork(artwork.id, card));
             card.addEventListener("keydown", (event) => {
                 if (event.target !== card) return;
@@ -285,6 +301,7 @@ function renderAppendix() {
         const medium = document.createElement("p");
         medium.className = "medium-text";
         medium.textContent = `${artwork.medium}`;
+        const date = createDateLabel(artwork);
 
         const description = document.createElement("p");
         description.textContent = artwork.appendices?.length ? `${artwork.appendices.length} supporting items` : artwork.description;
@@ -298,7 +315,9 @@ function renderAppendix() {
             openAppendixModal(artwork.id, readMore);
         });
 
-        card.append(media, title, medium, description, readMore);
+        card.append(media, title, medium);
+        if (date) card.append(date);
+        card.append(description, readMore);
         card.addEventListener("click", () => openAppendixModal(artwork.id, card));
         appendixGrid.append(card);
     });
@@ -326,9 +345,12 @@ function openArtwork(id, trigger) {
     const heading = document.createElement("h2");
     heading.id = "modal-title";
     heading.textContent = artwork.title;
+    const date = createDateLabel(artwork);
     const description = document.createElement("p");
     description.textContent = artwork.description;
-    copy.append(eyebrow, heading, description);
+    copy.append(eyebrow, heading);
+    if (date) copy.append(date);
+    copy.append(description);
 
     if (artwork.group === "exploration") {
         const appendixButton = document.createElement("button");
@@ -378,7 +400,10 @@ function openAppendixModal(id, trigger, fromArtworkModal = false) {
 
     const copy = document.createElement("div");
     copy.className = "modal-copy";
-    copy.append(eyebrow, heading, medium);
+    const date = createDateLabel(artwork);
+    copy.append(eyebrow, heading);
+    if (date) copy.append(date);
+    copy.append(medium);
 
     const items = artwork.appendices?.length
         ? artwork.appendices
