@@ -179,3 +179,23 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
     font: 700 .7rem 'Quicksand', sans-serif;
     letter-spacing: .025em;
 }
+
+
+/* Artwork summaries and appendix cards */
+.artwork-card { cursor: default; }
+.artwork-card-caption { margin: 0; }
+.medium-text { margin: .1rem .35rem .35rem; color: var(--muted); font-size: .78rem; font-weight: 600; }
+.card-description { display: -webkit-box; overflow: hidden; margin: .25rem .35rem .55rem; color: var(--muted); font-size: .88rem; line-height: 1.5; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.read-more-button { align-self: flex-start; margin: auto .35rem .35rem; padding: .2rem 0; border: 0; color: var(--berry); background: transparent; font-weight: 700; text-decoration: underline; text-underline-offset: .2rem; cursor: pointer; }
+.read-more-button:hover, .read-more-button:focus-visible { color: var(--rose-wine); }
+.appendix-section { padding: clamp(4rem, 8vw, 7rem) max(1.5rem, calc((100vw - 1100px) / 2)); background: #fff0e9; }
+.appendix-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 2rem); max-width: 1100px; margin: auto; }
+.appendix-card { scroll-margin-top: 6rem; padding: 1rem; border: 1px solid rgba(143, 49, 93, .14); border-radius: 1rem; background: var(--paper); box-shadow: 0 9px 28px rgba(91, 34, 62, .08); }
+.appendix-card:focus { outline: 2px solid var(--berry); outline-offset: 4px; }
+.appendix-card h3 { margin: .7rem .35rem .2rem; color: var(--rose-wine); font-size: 1.35rem; }
+.appendix-card > p:last-child { margin: .2rem .35rem .4rem; color: var(--muted); }
+.appendix-card-media { display: block; width: 100%; max-height: 70svh; border-radius: .7rem; background: var(--blush); object-fit: contain; }
+@media (max-width: 760px) {
+    .appendix-section { padding: 4.5rem 1.15rem; }
+    .appendix-grid { grid-template-columns: 1fr; max-width: 520px; }
+}
