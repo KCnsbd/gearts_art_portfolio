@@ -113,8 +113,8 @@ function createMedia(src, title, className, controls = false) {
 function renderGallery() {
     if (!gallery) return;
     const sections = [
-        { key: "classwork", id: "part-one", title: "Part I | My Art Appreciation Journey", note: "GEARTS+ outputs gathered into a curated exhibition." },
-        { key: "exploration", id: "part-two", title: "Part II | My Artistic Exploration", note: "New work, unfamiliar forms, and creative experiments." }
+        { key: "classwork", id: "part-one", title: "Part I | Art Appreciation", note: "My GEARTS+ outputs, gathered as a curated exhibition." },
+        { key: "exploration", id: "part-two", title: "Part II | Artistic Exploration", note: "New work, unfamiliar forms, and experiments." }
     ];
 
     sections.forEach(({ key, id, title, note }) => {
@@ -200,7 +200,16 @@ function renderAppendix() {
         const description = document.createElement("p");
         description.textContent = artwork.description;
 
-        card.append(media, title, medium, description);
+        const readMore = document.createElement("button");
+        readMore.type = "button";
+        readMore.className = "appendix-read-more";
+        readMore.textContent = "Read more ↗";
+        readMore.addEventListener("click", (event) => {
+            event.stopPropagation();
+            openAppendixModal(artwork.id, readMore);
+        });
+
+        card.append(media, title, medium, description, readMore);
         card.addEventListener("click", () => openAppendixModal(artwork.id, card));
         card.addEventListener("keydown", (event) => {
             if (event.target !== card) return;
@@ -245,7 +254,7 @@ function openArtwork(id, trigger) {
         appendixButton.className = "appendix-button";
         appendixButton.type = "button";
         appendixButton.innerHTML = '<span aria-hidden="true">▧</span> View Appendix';
-        appendixButton.addEventListener("click", jumpToAppendix);
+        appendixButton.addEventListener("click", () => openAppendixModal(artwork.id, appendixButton, true));
         copy.append(appendixButton);
     }
     modalContent.append(copy);
@@ -271,10 +280,11 @@ function jumpToAppendix() {
     window.setTimeout(() => target.focus({ preventScroll: true }), 350);
 }
 
-function openAppendixModal(id, trigger) {
+function openAppendixModal(id, trigger, fromArtworkModal = false) {
     const artwork = artworks.find((item) => item.id === id && item.group === "exploration");
     if (!artwork) return;
-    lastFocusedAppendixElement = trigger || document.activeElement;
+    lastFocusedAppendixElement = fromArtworkModal ? lastFocusedElement : (trigger || document.activeElement);
+    if (fromArtworkModal) artModal.hidden = true;
     appendixModalContent.replaceChildren();
 
     const close = document.createElement("button");
