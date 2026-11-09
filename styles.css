@@ -394,3 +394,16 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 @media (max-width: 480px) {
     .contents-list { grid-template-columns: 1fr; }
 }
+
+
+/* The table of contents sits between Home and About. */
+.contents-section {
+    scroll-margin-top: 5rem;
+    padding: clamp(2.5rem, 5vw, 4rem) max(1.5rem, calc((100vw - 1400px) / 2));
+    background: linear-gradient(145deg, #fff0e9, #fffaf7);
+}
+.contents-section .contents-nav { margin: 0 auto; }
+.contents-section .about-flower { display: block; margin-top: .5rem; color: var(--coral); text-align: center; font-size: 1.5rem; }
+@media (max-width: 760px) {
+    .contents-section { padding: 2.5rem 1.15rem; }
+}
