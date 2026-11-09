@@ -225,7 +225,9 @@ function appendArtworkCredits(container, artwork) {
     if (artwork.groupName) {
         const group = document.createElement("p");
         group.className = "artwork-group-name";
-        group.innerHTML = `<strong>Group:</strong> ${artwork.groupName}`;
+        const groupLabel = document.createElement("strong");
+        groupLabel.textContent = "Group:";
+        group.append(groupLabel, document.createTextNode(` ${artwork.groupName}`));
         credits.append(group);
     }
 
