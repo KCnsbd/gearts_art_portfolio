@@ -80,9 +80,12 @@ const artworks = [
 const gallery = document.querySelector(".gallery-groups");
 const appendixGrid = document.querySelector(".appendix-grid");
 const artModal = document.getElementById("art-modal");
+const appendixModal = document.getElementById("appendix-modal");
+const appendixModalContent = document.getElementById("appendix-modal-content");
 const modalContent = document.getElementById("modal-content");
 let activeArtwork = null;
 let lastFocusedElement = null;
+let lastFocusedAppendixElement = null;
 
 function createMedia(src, title, className, controls = false) {
     const isVideo = /\.mp4(?:$|\?)/i.test(src);
@@ -134,7 +137,9 @@ function renderGallery() {
         artworks.filter((artwork) => artwork.group === key).forEach((artwork) => {
             const card = document.createElement("article");
             card.className = "artwork-card";
-            card.setAttribute("aria-labelledby", `artwork-title-${artwork.id}`);
+            card.setAttribute("role", "button");
+            card.tabIndex = 0;
+            card.setAttribute("aria-label", `Open details for ${artwork.title}`);
 
             const mediaWrap = document.createElement("div");
             mediaWrap.className = "artwork-media-wrap";
@@ -142,7 +147,6 @@ function renderGallery() {
 
             const caption = document.createElement("h4");
             caption.className = "artwork-card-caption";
-            caption.id = `artwork-title-${artwork.id}`;
             caption.textContent = artwork.title;
 
             const medium = document.createElement("p");
@@ -153,14 +157,20 @@ function renderGallery() {
             description.className = "card-description";
             description.textContent = artwork.description;
 
-            const readMore = document.createElement("button");
-            readMore.type = "button";
+            const readMore = document.createElement("span");
             readMore.className = "read-more-button";
-            readMore.textContent = "Read more";
-            readMore.setAttribute("aria-label", `Read more about ${artwork.title}`);
-            readMore.addEventListener("click", () => openArtwork(artwork.id, readMore));
+            readMore.textContent = "Read more ↗";
+            readMore.setAttribute("aria-hidden", "true");
 
             card.append(mediaWrap, caption, medium, description, readMore);
+            card.addEventListener("click", () => openArtwork(artwork.id, card));
+            card.addEventListener("keydown", (event) => {
+                if (event.target !== card) return;
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    openArtwork(artwork.id, card);
+                }
+            });
             grid.append(card);
         });
 
@@ -175,9 +185,11 @@ function renderAppendix() {
         const card = document.createElement("article");
         card.id = `appendix-${artwork.id}`;
         card.className = "appendix-card";
-        card.tabIndex = -1;
+        card.setAttribute("role", "button");
+        card.tabIndex = 0;
+        card.setAttribute("aria-label", `Open appendix for ${artwork.title}`);
 
-        const media = createMedia(artwork.src, artwork.title, "appendix-card-media", true);
+        const media = createMedia(artwork.src, artwork.title, "appendix-card-media");
         const title = document.createElement("h3");
         title.textContent = artwork.title;
 
@@ -189,6 +201,14 @@ function renderAppendix() {
         description.textContent = artwork.description;
 
         card.append(media, title, medium, description);
+        card.addEventListener("click", () => openAppendixModal(artwork.id, card));
+        card.addEventListener("keydown", (event) => {
+            if (event.target !== card) return;
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openAppendixModal(artwork.id, card);
+            }
+        });
         appendixGrid.append(card);
     });
 }
@@ -251,6 +271,52 @@ function jumpToAppendix() {
     window.setTimeout(() => target.focus({ preventScroll: true }), 350);
 }
 
+function openAppendixModal(id, trigger) {
+    const artwork = artworks.find((item) => item.id === id && item.group === "exploration");
+    if (!artwork) return;
+    lastFocusedAppendixElement = trigger || document.activeElement;
+    appendixModalContent.replaceChildren();
+
+    const close = document.createElement("button");
+    close.className = "modal-close";
+    close.type = "button";
+    close.setAttribute("aria-label", "Close appendix");
+    close.textContent = "×";
+    appendixModalContent.append(close);
+
+    const eyebrow = document.createElement("p");
+    eyebrow.className = "eyebrow";
+    eyebrow.textContent = "ART EXPLORATION APPENDIX";
+
+    const heading = document.createElement("h2");
+    heading.id = "appendix-modal-title";
+    heading.textContent = artwork.title;
+
+    const medium = document.createElement("p");
+    medium.className = "medium-text";
+    medium.textContent = `Medium: ${artwork.medium}`;
+
+    const media = createMedia(artwork.src, artwork.title, "modal-artwork", true);
+    const description = document.createElement("p");
+    description.className = "appendix-description";
+    description.textContent = artwork.appendixDescription || artwork.description;
+
+    const copy = document.createElement("div");
+    copy.className = "modal-copy";
+    copy.append(eyebrow, heading, medium, description);
+    appendixModalContent.append(media, copy);
+
+    appendixModal.hidden = false;
+    document.body.classList.add("modal-active");
+    close.focus();
+}
+
+function closeAppendixModal() {
+    appendixModal.hidden = true;
+    document.body.classList.remove("modal-active");
+    lastFocusedAppendixElement?.focus();
+}
+
 renderGallery();
 renderAppendix();
 
@@ -271,8 +337,12 @@ navigation?.querySelectorAll("a").forEach((link) => link.addEventListener("click
 artModal?.addEventListener("click", (event) => {
     if (event.target === artModal || event.target.closest(".modal-close")) closeArtwork();
 });
+appendixModal?.addEventListener("click", (event) => {
+    if (event.target === appendixModal || event.target.closest(".modal-close")) closeAppendixModal();
+});
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-        if (!artModal.hidden) closeArtwork();
+        if (!appendixModal.hidden) closeAppendixModal();
+        else if (!artModal.hidden) closeArtwork();
     }
 });
