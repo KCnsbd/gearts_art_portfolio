@@ -76,11 +76,29 @@ const artworks = [
         description: "A 2023 landscape painting revamped in 2026. Returning to the piece let me see how my approach to contrast, value, lighting, and shadow had developed.",
         dateLabel: "Created: December 27, 2023 · Revamped: September 23, 2026",
         medium: "Digital Illustration",
-        appendices: [
-            { src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun(og).clip", title: "Original Clip Studio file", download: true },
-            { src: "assets/art-exploration/appendix/sandbearer-og-ss.png", title: "Original layers screenshot" },
-            { src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun (revamp).ipv", title: "Revamped artwork file", download: true },
-            { src: "assets/art-exploration/appendix/sandbearer-revamp-ss.jpg", title: "Revamped layers screenshot" }
+        appendixGroups: [
+            {
+                title: "Original layers",
+                preview: {
+                    src: "assets/art-exploration/appendix/sandbearer-og-ss.png",
+                    title: "Original layers screenshot"
+                },
+                download: {
+                    src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun(og).clip",
+                    label: "Download original Clip Studio file ↓"
+                }
+            },
+            {
+                title: "Revamped layers",
+                preview: {
+                    src: "assets/art-exploration/appendix/sandbearer-revamp-ss.jpg",
+                    title: "Revamped layers screenshot"
+                },
+                download: {
+                    src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun (revamp).ipv",
+                    label: "Download revamped artwork file ↓"
+                }
+            }
         ]
     },
     {
@@ -419,7 +437,8 @@ function renderAppendix() {
         const date = createDateLabel(artwork);
 
         const description = document.createElement("p");
-        description.textContent = artwork.appendices?.length ? `${artwork.appendices.length} supporting items` : artwork.description;
+        const supportingCount = artwork.appendixGroups?.length || artwork.appendices?.length || 0;
+        description.textContent = supportingCount ? `${supportingCount} supporting items` : artwork.description;
 
         const readMore = document.createElement("button");
         readMore.type = "button";
@@ -531,31 +550,52 @@ function openAppendixModal(id, trigger, fromArtworkModal = false) {
     if (date) copy.append(date);
     copy.append(medium);
 
-    const items = artwork.appendices?.length
-        ? artwork.appendices
-        : [{ src: artwork.src, title: "Full artwork view" }];
-
     const appendixItems = document.createElement("div");
     appendixItems.className = "appendix-items";
-    items.forEach((item) => {
-        const itemSection = document.createElement("section");
-        itemSection.className = "appendix-item";
 
-        const itemHeading = document.createElement("h3");
-        itemHeading.textContent = item.title;
-        itemSection.append(itemHeading, createMedia(item.src, item.title, "appendix-artwork", true));
+    if (artwork.appendixGroups?.length) {
+        artwork.appendixGroups.forEach((group) => {
+            const itemSection = document.createElement("section");
+            itemSection.className = "appendix-item";
 
-        if (item.download) {
+            const itemHeading = document.createElement("h3");
+            itemHeading.textContent = group.title;
+
+            const preview = createMedia(group.preview.src, group.preview.title, "appendix-artwork", true);
             const download = document.createElement("a");
             download.className = "appendix-download-link";
-            download.href = item.src;
+            download.href = group.download.src;
             download.setAttribute("download", "");
-            download.textContent = `Download ${item.title.toLowerCase()} ↓`;
-            itemSection.append(download);
-        }
+            download.textContent = group.download.label;
 
-        appendixItems.append(itemSection);
-    });
+            itemSection.append(itemHeading, preview, download);
+            appendixItems.append(itemSection);
+        });
+    } else {
+        const items = artwork.appendices?.length
+            ? artwork.appendices
+            : [{ src: artwork.src, title: "Full artwork view" }];
+
+        items.forEach((item) => {
+            const itemSection = document.createElement("section");
+            itemSection.className = "appendix-item";
+
+            const itemHeading = document.createElement("h3");
+            itemHeading.textContent = item.title;
+            itemSection.append(itemHeading, createMedia(item.src, item.title, "appendix-artwork", true));
+
+            if (item.download) {
+                const download = document.createElement("a");
+                download.className = "appendix-download-link";
+                download.href = item.src;
+                download.setAttribute("download", "");
+                download.textContent = `Download ${item.title.toLowerCase()} ↓`;
+                itemSection.append(download);
+            }
+
+            appendixItems.append(itemSection);
+        });
+    }
 
     appendixModalContent.append(copy, appendixItems);
 
