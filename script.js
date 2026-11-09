@@ -46,7 +46,11 @@ const artworks = [
         title: "BJ",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         medium: "Felt Craft",
-        appendixDescription: "Full artwork view."
+        appendices: [
+            { src: "assets/art-exploration/appendix/feltcrafts/materials.jpg", title: "Materials" },
+            { src: "assets/art-exploration/appendix/feltcrafts/process1.jpg", title: "Process · 1" },
+            { src: "assets/art-exploration/appendix/feltcrafts/process2.jpg", title: "Process · 2" }
+        ]
     },
     {
         id: "felt-doll",
@@ -55,7 +59,9 @@ const artworks = [
         title: "My Love Language",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         medium: "Felt Craft",
-        appendixDescription: "Full artwork view."
+        appendices: [
+            { src: "assets/art-exploration/appendix/feltcrafts/document_6307514053791064889.mp4", title: "Timelapse" }
+        ]
     },
     {
         id: "we-were-just-children",
@@ -64,7 +70,9 @@ const artworks = [
         title: "We Were Just Children",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         medium: "Digital Animation",
-        appendixDescription: "Full video."
+        appendices: [
+            { src: "assets/art-exploration/appendix/children(layers).mp4", title: "Layer Recording" }
+        ]
     },
     {
         id: "sandbearer",
@@ -73,7 +81,33 @@ const artworks = [
         title: "Where the Sandbearer Meets the Sun",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         medium: "Digital Illustration",
-        appendixDescription: "Full artwork view."
+        appendices: [
+            { src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun(og).clip", title: "Original Clip Studio file", download: true },
+            { src: "assets/art-exploration/appendix/sandbearer-og-ss.png", title: "Original layers screenshot" },
+            { src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun (revamp).ipv", title: "Revamped artwork file", download: true },
+            { src: "assets/art-exploration/appendix/sandbearer-revamp-ss.jpg", title: "Revamped layers screenshot" }
+        ]
+    },
+    {
+        id: "quiet-corner-photography",
+        group: "exploration",
+        src: "assets/art-exploration/A Quiet Corner of Stories/1.jpg",
+        photos: [
+            "assets/art-exploration/A Quiet Corner of Stories/1.jpg",
+            "assets/art-exploration/A Quiet Corner of Stories/2.jpg",
+            "assets/art-exploration/A Quiet Corner of Stories/3.jpg",
+            "assets/art-exploration/A Quiet Corner of Stories/4.jpg"
+        ],
+        title: "A Quiet Corner of Stories",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        medium: "Photography",
+        appendices: [
+            { src: "assets/art-exploration/appendix/photography/raw1.jpg", title: "Original photo · 1" },
+            { src: "assets/art-exploration/appendix/photography/raw2.jpg", title: "Original photo · 2" },
+            { src: "assets/art-exploration/appendix/photography/raw3.jpg", title: "Original photo · 3" },
+            { src: "assets/art-exploration/appendix/photography/raw4.jpg", title: "Original photo · 4" },
+            { src: "assets/art-exploration/appendix/photography/lightroom-ss.jpg", title: "Lightroom editing screenshot" }
+        ]
     }
 ];
 
@@ -109,6 +143,62 @@ function createMedia(src, title, className, controls = false) {
     return media;
 }
 
+function createPhotoSlideshow(photos, title, className, interactive = false) {
+    const slideshow = document.createElement("div");
+    slideshow.className = `photo-slideshow ${className}`;
+    slideshow.setAttribute("aria-label", `${title} photo slideshow`);
+
+    const image = document.createElement("img");
+    image.className = "slideshow-photo";
+    image.src = photos[0];
+    image.alt = `${title}, photo 1 of ${photos.length}`;
+    image.loading = interactive ? "eager" : "lazy";
+    slideshow.append(image);
+
+    let currentIndex = 0;
+    const updatePhoto = (step) => {
+        currentIndex = (currentIndex + step + photos.length) % photos.length;
+        image.src = photos[currentIndex];
+        image.alt = `${title}, photo ${currentIndex + 1} of ${photos.length}`;
+        const counter = slideshow.querySelector(".slideshow-counter");
+        if (counter) counter.textContent = `${currentIndex + 1} / ${photos.length}`;
+    };
+
+    if (interactive) {
+        slideshow.classList.add("is-interactive");
+        [["previous", "‹", -1], ["next", "›", 1]].forEach(([direction, label, step]) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = `slideshow-arrow slideshow-arrow-${direction}`;
+            button.setAttribute("aria-label", `${direction === "previous" ? "Previous" : "Next"} photo`);
+            button.textContent = label;
+            button.addEventListener("click", () => updatePhoto(step));
+            slideshow.append(button);
+        });
+        const counter = document.createElement("span");
+        counter.className = "slideshow-counter";
+        counter.setAttribute("aria-live", "polite");
+        counter.textContent = `1 / ${photos.length}`;
+        slideshow.append(counter);
+    } else if (photos.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        let timer;
+        const start = () => {
+            if (!timer) timer = window.setInterval(() => updatePhoto(1), 3200);
+        };
+        const stop = () => {
+            window.clearInterval(timer);
+            timer = undefined;
+        };
+        slideshow.addEventListener("mouseenter", stop);
+        slideshow.addEventListener("mouseleave", start);
+        slideshow.addEventListener("focusin", stop);
+        slideshow.addEventListener("focusout", start);
+        start();
+    }
+
+    return slideshow;
+}
+
 function renderGallery() {
     if (!gallery) return;
     const sections = [
@@ -142,7 +232,7 @@ function renderGallery() {
 
             const mediaWrap = document.createElement("div");
             mediaWrap.className = "artwork-media-wrap";
-            mediaWrap.append(createMedia(artwork.src, artwork.title, "artwork-media"));
+            mediaWrap.append(artwork.photos?.length ? createPhotoSlideshow(artwork.photos, artwork.title, "gallery-photo-slideshow") : createMedia(artwork.src, artwork.title, "artwork-media"));
 
             const caption = document.createElement("h4");
             caption.className = "artwork-card-caption";
@@ -185,7 +275,7 @@ function renderAppendix() {
         card.id = `appendix-${artwork.id}`;
         card.className = "appendix-card";
 
-        const media = createMedia(artwork.src, artwork.title, "appendix-card-media");
+        const media = createMedia(artwork.appendices?.[0]?.src || artwork.src, artwork.appendices?.[0]?.title || artwork.title, "appendix-card-media");
         const title = document.createElement("h3");
         title.textContent = artwork.title;
 
@@ -194,7 +284,7 @@ function renderAppendix() {
         medium.textContent = `${artwork.medium}`;
 
         const description = document.createElement("p");
-        description.textContent = artwork.description;
+        description.textContent = artwork.appendices?.length ? `${artwork.appendices.length} supporting items` : artwork.description;
 
         const readMore = document.createElement("button");
         readMore.type = "button";
@@ -223,7 +313,7 @@ function openArtwork(id, trigger) {
     close.setAttribute("aria-label", "Close artwork details");
     close.textContent = "×";
     modalContent.append(close);
-    modalContent.append(createMedia(artwork.src, artwork.title, "modal-artwork", true));
+    modalContent.append(artwork.photos?.length ? createPhotoSlideshow(artwork.photos, artwork.title, "modal-photo-slideshow", true) : createMedia(artwork.src, artwork.title, "modal-artwork", true));
 
     const copy = document.createElement("div");
     copy.className = "modal-copy";
@@ -283,15 +373,37 @@ function openAppendixModal(id, trigger, fromArtworkModal = false) {
     medium.className = "medium-text";
     medium.textContent = `${artwork.medium}`;
 
-    const media = createMedia(artwork.src, artwork.title, "modal-artwork", true);
-    const description = document.createElement("p");
-    description.className = "appendix-description";
-    description.textContent = artwork.appendixDescription || artwork.description;
-
     const copy = document.createElement("div");
     copy.className = "modal-copy";
-    copy.append(eyebrow, heading, medium, description);
-    appendixModalContent.append(media, copy);
+    copy.append(eyebrow, heading, medium);
+
+    const items = artwork.appendices?.length
+        ? artwork.appendices
+        : [{ src: artwork.src, title: "Full artwork view" }];
+
+    const appendixItems = document.createElement("div");
+    appendixItems.className = "appendix-items";
+    items.forEach((item) => {
+        const itemSection = document.createElement("section");
+        itemSection.className = "appendix-item";
+
+        const itemHeading = document.createElement("h3");
+        itemHeading.textContent = item.title;
+        itemSection.append(itemHeading, createMedia(item.src, item.title, "appendix-artwork", true));
+
+        if (item.download) {
+            const download = document.createElement("a");
+            download.className = "appendix-download-link";
+            download.href = item.src;
+            download.setAttribute("download", "");
+            download.textContent = `Download ${item.title.toLowerCase()} ↓`;
+            itemSection.append(download);
+        }
+
+        appendixItems.append(itemSection);
+    });
+
+    appendixModalContent.append(copy, appendixItems);
 
     appendixModal.hidden = false;
     document.body.classList.add("modal-active");
