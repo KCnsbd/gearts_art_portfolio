@@ -248,7 +248,7 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 }
 
 /* Gentle, playful image hover motion. */
-.about-photo, .artwork-media, .appendix-card-media {
+.about-photo, .artwork-media, .appendix-card-media, .modal-artwork {
     transform: scale(1);
     transition: transform .45s cubic-bezier(.2,.8,.2,1), filter .45s ease;
 }
@@ -257,7 +257,8 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 .about-photo-wrap:hover .about-photo { transform: scale(1.055); filter: saturate(1.08); }
 .artwork-card, .appendix-card { cursor: pointer; transition: transform .25s ease, box-shadow .25s ease; }
 .artwork-card:hover .artwork-media, .artwork-card:focus-visible .artwork-media,
-.appendix-card:hover .appendix-card-media, .appendix-card:focus-visible .appendix-card-media {
+.appendix-card:hover .appendix-card-media, .appendix-card:focus-visible .appendix-card-media,
+.modal-artwork:hover {
     transform: scale(1.045);
     filter: saturate(1.08);
 }
@@ -265,7 +266,7 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 .appendix-card { overflow: hidden; }
 .read-more-button { display: inline-block; }
 @media (prefers-reduced-motion: reduce) {
-    .about-photo, .artwork-media, .appendix-card-media, .about-photo-wrap, .artwork-media-wrap, .artwork-card, .appendix-card {
+    .about-photo, .artwork-media, .appendix-card-media, .modal-artwork, .about-photo-wrap, .artwork-media-wrap, .artwork-card, .appendix-card {
         transition: none;
     }
 }
