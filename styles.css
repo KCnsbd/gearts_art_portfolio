@@ -762,3 +762,202 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
     .work-filter { gap: .5rem; }
     .work-filter-button { min-width: 0; flex: 1 1 100%; }
 }
+
+
+/* Classier editorial redesign */
+:root {
+    --rose-wine: #282824;
+    --berry: #806b4e;
+    --coral: #a58b67;
+    --blush: #eeeae2;
+    --paper: #f7f6f2;
+    --ink: #282824;
+    --muted: #716f68;
+    --shadow: 0 14px 36px rgba(35, 33, 29, .08);
+    --serif: "Playfair Display", Georgia, serif;
+    --sans: "DM Sans", Arial, sans-serif;
+}
+html { scroll-padding-top: 5.25rem; }
+body {
+    color: var(--ink);
+    background: var(--paper);
+    font-family: var(--sans);
+    line-height: 1.75;
+}
+h1, h2, h3, .brand, .footer-brand,
+.contents-nav h3, .gallery-group-heading h3,
+.artwork-card-caption, .appendix-card h3 {
+    font-family: var(--serif);
+    letter-spacing: 0;
+}
+.site-header {
+    background: rgba(38, 38, 35, .96);
+    border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.nav-links { gap: clamp(1rem, 2.5vw, 2rem); }
+.nav-links a {
+    color: #f5f2ec;
+    font-size: .88rem;
+    font-weight: 500;
+    letter-spacing: .04em;
+}
+.nav-links a:hover, .nav-links a:focus-visible { color: #c8b18d; }
+.hero-section {
+    background:
+        linear-gradient(120deg, rgba(30, 31, 29, .84), rgba(45, 43, 38, .57)),
+        url("assets/home-bg.jpg") center / cover no-repeat,
+        #292a27;
+}
+.hero-section::before, .hero-section::after { content: none; }
+.hero-section .eyebrow { color: #d2c1a4; }
+.main-title {
+    color: #f2ede3;
+    font-weight: 500;
+    letter-spacing: .045em;
+}
+.subtitle {
+    color: #f7f5ef;
+    font-family: var(--sans);
+    font-weight: 400;
+    letter-spacing: .28em;
+}
+.hero-intro { max-width: 560px; color: rgba(255,255,255,.92); }
+.course-note { color: rgba(255,255,255,.7); }
+.quick-link {
+    min-height: 46px;
+    border-radius: 3px;
+    font-size: .88rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+}
+.quick-link.primary-link {
+    color: #292a27;
+    background: #eee8dc;
+    border-color: #eee8dc;
+}
+.quick-link:hover { transform: translateY(-1px); }
+.scroll-cue { letter-spacing: .08em; text-transform: uppercase; }
+.contents-section { background: #eeece6; }
+.contents-section .about-flower, .about-section .about-flower { display: none; }
+.contents-list li { border-color: rgba(40,40,36,.14); }
+.contents-list a {
+    color: var(--ink);
+    transition: color .2s ease, padding .2s ease;
+}
+.contents-list a:hover { color: var(--berry); padding-left: .5rem; }
+.contents-number, .contents-arrow { color: var(--berry); }
+.contents-copy strong { font-family: var(--serif); font-size: 1.05rem; }
+.about-section { background: #f7f6f2; }
+.about-section .section-heading h2,
+.section-heading h2,
+.about-section .card h3,
+.contents-nav h3,
+.gallery-group-heading h3,
+.reflection-card h2,
+.modal-copy h2, .appendix-panel h2,
+.appendix-card h3 { color: var(--ink); }
+.eyebrow, .about-section .eyebrow,
+.about-section .card .eyebrow { color: var(--berry); }
+.about-photo-wrap {
+    border: 0;
+    border-radius: 2px;
+    background: var(--blush);
+}
+.about-section .card h3 { font-size: 1.75rem; }
+.about-section .card p, .reflection-card p:not(.eyebrow) { color: #57564f; }
+.gallery-section { background: #f1f0eb; }
+.gallery-group-heading {
+    border-bottom: 1px solid rgba(40,40,36,.2);
+}
+.gallery-group-exploration .gallery-group-heading { border-color: rgba(40,40,36,.2); }
+.gallery-group-exploration .gallery-group-heading h3 { color: var(--ink); }
+.artwork-card {
+    padding: .65rem;
+    border: 1px solid rgba(40,40,36,.12);
+    border-radius: 3px;
+    color: var(--ink);
+    background: #fbfaf7;
+    box-shadow: none;
+    transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.artwork-card:hover, .artwork-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: rgba(128,107,78,.55);
+    box-shadow: 0 12px 28px rgba(35,33,29,.1);
+    outline-color: var(--berry);
+}
+.artwork-media-wrap, .artwork-media { border-radius: 1px; background: #ebe8e0; }
+.artwork-card-caption {
+    padding-top: .75rem;
+    color: var(--ink);
+    font-size: 1.18rem;
+}
+.card-arrow, .work-type-label, .work-type-group, .work-type-individual { color: var(--berry); }
+.work-filter-button {
+    min-width: 128px;
+    padding: .65rem 1rem;
+    border: 1px solid rgba(40,40,36,.22);
+    border-radius: 2px;
+    color: var(--ink);
+    background: transparent;
+    font-family: var(--sans);
+    font-size: .86rem;
+    font-weight: 500;
+    letter-spacing: .025em;
+}
+.work-filter-button:hover { border-color: var(--berry); }
+.work-filter-button.is-active,
+.work-filter-button[aria-pressed="true"] {
+    border-color: #292a27;
+    color: #f7f6f2;
+    background: #292a27;
+    box-shadow: none;
+}
+.reflection-section { background: #eae8e1; }
+.reflection-card { max-width: 790px; }
+.reflection-card h2 { font-size: clamp(2.3rem, 5vw, 3.5rem); }
+.appendix-section { background: #f7f6f2; }
+.appendix-card {
+    padding: .8rem;
+    border: 1px solid rgba(40,40,36,.13);
+    border-radius: 3px;
+    background: #fbfaf7;
+    box-shadow: none;
+}
+.appendix-card h3 { font-size: 1.45rem; }
+.appendix-card-media { border-radius: 1px; background: #ebe8e0; }
+footer { color: rgba(255,255,255,.72); background: #292a27; }
+.footer-brand { color: #e7ddca; font-weight: 500; }
+.modal-panel {
+    border: 1px solid rgba(40,40,36,.1);
+    border-radius: 3px;
+    background: #f7f6f2;
+}
+.modal-close {
+    border-radius: 2px;
+    color: var(--ink);
+    background: #eae7df;
+}
+.appendix-button {
+    border-radius: 2px;
+    color: white;
+    background: #292a27;
+    font-family: var(--sans);
+    font-weight: 500;
+}
+.appendix-button:hover { background: var(--berry); }
+@media (max-width: 760px) {
+    .nav-links {
+        background: rgba(38,38,35,.98);
+        border-bottom-color: rgba(255,255,255,.12);
+    }
+    .menu-toggle {
+        border-radius: 2px;
+        border-color: rgba(255,255,255,.3);
+        background: transparent;
+    }
+    .work-filter-button { flex-basis: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
