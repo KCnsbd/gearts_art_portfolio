@@ -91,6 +91,7 @@ const artworks = [
         description: "A 16-second frame-by-frame animation inspired by Peruere and Clervie’s story in Genshin Impact. It contrasts their childhood innocence with the tragic fate waiting for them.",
         dateLabel: "Created: October 13–15, 2026",
         medium: "Digital Animation",
+        sourceFileUrl: "https://drive.google.com/file/d/1vz4iUton_SScqp5WNIstX9U06YLrvlaE/view?usp=sharing",
         appendices: [
             { src: "assets/art-exploration/appendix/children(layers).mp4", title: "Layer Recording" }
         ]
@@ -557,6 +558,16 @@ function openAppendixModal(id, trigger, fromArtworkModal = false) {
     });
 
     appendixModalContent.append(copy, appendixItems);
+
+    if (artwork.sourceFileUrl) {
+        const sourceFileLink = document.createElement("a");
+        sourceFileLink.className = "analysis-link";
+        sourceFileLink.href = artwork.sourceFileUrl;
+        sourceFileLink.target = "_blank";
+        sourceFileLink.rel = "noopener noreferrer";
+        sourceFileLink.textContent = "Download original artwork file ↗";
+        appendixModalContent.append(sourceFileLink);
+    }
 
     appendixModal.hidden = false;
     document.body.classList.add("modal-active");
