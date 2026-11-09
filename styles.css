@@ -57,7 +57,6 @@ button { font: inherit; }
 .main-title { margin: 0; color: #ffd4b7; font-size: clamp(3.2rem, 10vw, 7.2rem); line-height: 1.05; }
 .subtitle { margin: .35rem 0 1rem; color: white; font: 700 clamp(1rem, 2.3vw, 1.4rem) 'Quicksand', sans-serif; text-transform: uppercase; letter-spacing: .32em; }
 .hero-intro { max-width: 540px; margin: 1.2rem auto .35rem; font-size: clamp(1rem, 2.4vw, 1.2rem); }
-.course-note { margin: .4rem auto 0; color: rgba(255,255,255,.78); font-size: .88rem; }
 .quick-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-top: 2rem; }
 .quick-link { display: inline-flex; justify-content: center; align-items: center; gap: .65rem; min-height: 48px; padding: .75rem 1.15rem; border: 1px solid rgba(255,255,255,.7); border-radius: 999px; color: white; text-decoration: none; font-weight: 700; background: rgba(255,255,255,.1); transition: transform .2s ease, background .2s ease; }
 .quick-link:hover { transform: translateY(-2px); background: rgba(255,255,255,.2); }
