@@ -168,18 +168,6 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 }
 
 
-.medium-tag {
-    align-self: flex-start;
-    margin: 0 .35rem .3rem;
-    padding: .28rem .62rem;
-    border: 1px solid rgba(143, 49, 93, .14);
-    border-radius: 999px;
-    color: var(--rose-wine);
-    background: var(--blush);
-    font: 700 .7rem 'Quicksand', sans-serif;
-    letter-spacing: .025em;
-}
-
 
 /* Artwork summaries and appendix cards */
 .artwork-card { cursor: default; }
