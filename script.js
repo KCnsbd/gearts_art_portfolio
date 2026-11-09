@@ -77,7 +77,11 @@ const artworks = [
     {
         id: "sandbearer",
         group: "exploration",
-        src: "assets/art-exploration/Where the Sandbearer Meets the Sun.png",
+        src: "assets/art-exploration/appendix/sandbearer-og-ss.png",
+        photos: [
+            "assets/art-exploration/appendix/sandbearer-og-ss.png",
+            "assets/art-exploration/appendix/sandbearer-revamp-ss.jpg"
+        ],
         title: "Where the Sandbearer Meets the Sun",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         medium: "Digital Illustration",
@@ -181,19 +185,7 @@ function createPhotoSlideshow(photos, title, className, interactive = false) {
         counter.textContent = `1 / ${photos.length}`;
         slideshow.append(counter);
     } else if (photos.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        let timer;
-        const start = () => {
-            if (!timer) timer = window.setInterval(() => updatePhoto(1), 3200);
-        };
-        const stop = () => {
-            window.clearInterval(timer);
-            timer = undefined;
-        };
-        slideshow.addEventListener("mouseenter", stop);
-        slideshow.addEventListener("mouseleave", start);
-        slideshow.addEventListener("focusin", stop);
-        slideshow.addEventListener("focusout", start);
-        start();
+        window.setInterval(() => updatePhoto(1), 3200);
     }
 
     return slideshow;
