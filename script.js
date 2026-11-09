@@ -78,10 +78,7 @@ const artworks = [
         id: "sandbearer",
         group: "exploration",
         src: "assets/art-exploration/Where the Sandbearer Meets the Sun.png",
-        galleryImages: [
-            { src: "assets/art-exploration/appendix/sandbearer-og-ss.png", title: "Original layers" },
-            { src: "assets/art-exploration/appendix/sandbearer-revamp-ss.jpg", title: "Revamped layers" }
-        ],
+        appendixPreview: "assets/art-exploration/appendix/sandbearer-og-ss.png",
         title: "Where the Sandbearer Meets the Sun",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         medium: "Digital Illustration",
@@ -147,27 +144,6 @@ function createMedia(src, title, className, controls = false) {
     return media;
 }
 
-function createGalleryImagePair(images, title) {
-    const pair = document.createElement("div");
-    pair.className = "gallery-image-pair";
-    pair.setAttribute("aria-label", `${title} process screenshots`);
-
-    images.forEach((item) => {
-        const figure = document.createElement("figure");
-        const image = document.createElement("img");
-        image.className = "gallery-image-pair-photo";
-        image.src = item.src;
-        image.alt = item.title;
-        image.loading = "lazy";
-
-        const caption = document.createElement("figcaption");
-        caption.textContent = item.title;
-        figure.append(image, caption);
-        pair.append(figure);
-    });
-
-    return pair;
-}
 
 function createPhotoSlideshow(photos, title, className, interactive = false) {
     const slideshow = document.createElement("div");
@@ -258,11 +234,7 @@ function renderGallery() {
 
             const mediaWrap = document.createElement("div");
             mediaWrap.className = "artwork-media-wrap";
-            if (artwork.galleryImages?.length) {
-                mediaWrap.append(createGalleryImagePair(artwork.galleryImages, artwork.title));
-            } else {
-                mediaWrap.append(artwork.photos?.length ? createPhotoSlideshow(artwork.photos, artwork.title, "gallery-photo-slideshow") : createMedia(artwork.src, artwork.title, "artwork-media"));
-            }
+            mediaWrap.append(artwork.photos?.length ? createPhotoSlideshow(artwork.photos, artwork.title, "gallery-photo-slideshow") : createMedia(artwork.src, artwork.title, "artwork-media"));
 
             const caption = document.createElement("h4");
             caption.className = "artwork-card-caption";
@@ -305,7 +277,8 @@ function renderAppendix() {
         card.id = `appendix-${artwork.id}`;
         card.className = "appendix-card";
 
-        const media = createMedia(artwork.appendices?.[0]?.src || artwork.src, artwork.appendices?.[0]?.title || artwork.title, "appendix-card-media");
+        const appendixPreview = artwork.appendixPreview || artwork.appendices?.[0]?.src || artwork.src;
+        const media = createMedia(appendixPreview, artwork.title, "appendix-card-media");
         const title = document.createElement("h3");
         title.textContent = artwork.title;
 
