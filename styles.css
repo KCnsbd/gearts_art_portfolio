@@ -670,3 +670,17 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 @media (prefers-reduced-motion: reduce) {
     .slideshow-track { transition: none; }
 }
+
+
+/* Show creation or capture dates clearly on artwork cards and in modals. */
+.artwork-date {
+    margin: .1rem .35rem .45rem;
+    color: var(--berry);
+    font-size: .76rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+.modal-copy .artwork-date {
+    margin: .2rem 0 .85rem;
+    font-size: .9rem;
+}
