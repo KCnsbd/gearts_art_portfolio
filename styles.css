@@ -825,3 +825,48 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 .reflection-section::before {
     background-position: 78px 42px;
 }
+
+
+/* Vary the faint background motif by section; the home hero remains untouched. */
+.contents-section::before {
+    background-image:
+        radial-gradient(ellipse 4px 9px at 50% 36%, rgba(188,67,119,.12) 90%, transparent 100%),
+        radial-gradient(ellipse 4px 9px at 50% 64%, rgba(188,67,119,.12) 90%, transparent 100%),
+        radial-gradient(ellipse 9px 4px at 36% 50%, rgba(188,67,119,.12) 90%, transparent 100%),
+        radial-gradient(ellipse 9px 4px at 64% 50%, rgba(188,67,119,.12) 90%, transparent 100%),
+        radial-gradient(circle 2px at 50% 50%, rgba(188,67,119,.16) 90%, transparent 100%);
+    background-size: 138px 138px;
+    background-position: 12px 16px;
+}
+.about-section::before {
+    background-image:
+        radial-gradient(circle at 1px 1px, rgba(188,67,119,.13) 1px, transparent 1.6px),
+        radial-gradient(circle, transparent 0 17px, rgba(188,67,119,.07) 18px 19px, transparent 20px);
+    background-size: 34px 34px, 102px 102px;
+    background-position: 0 0, 17px 23px;
+}
+.gallery-section::before {
+    background-image:
+        radial-gradient(circle 26px at 40px 40px, transparent 65%, rgba(188,67,119,.075) 68% 70%, transparent 73%),
+        radial-gradient(circle at 100px 100px, rgba(188,67,119,.11) 1px, transparent 1.7px);
+    background-size: 140px 140px;
+    background-position: 0 0;
+}
+.reflection-section::before {
+    background-image:
+        radial-gradient(ellipse 2px 8px at 50% 38%, rgba(188,67,119,.1) 90%, transparent 100%),
+        radial-gradient(ellipse 8px 2px at 38% 50%, rgba(188,67,119,.1) 90%, transparent 100%),
+        radial-gradient(ellipse 2px 8px at 50% 62%, rgba(188,67,119,.1) 90%, transparent 100%),
+        radial-gradient(ellipse 8px 2px at 62% 50%, rgba(188,67,119,.1) 90%, transparent 100%),
+        radial-gradient(circle 1.5px at 50% 50%, rgba(188,67,119,.14) 90%, transparent 100%);
+    background-size: 116px 116px;
+    background-position: 31px 18px;
+}
+.appendix-section::before {
+    background-image:
+        linear-gradient(45deg, transparent 47%, rgba(188,67,119,.07) 49% 51%, transparent 53%),
+        linear-gradient(-45deg, transparent 47%, rgba(188,67,119,.07) 49% 51%, transparent 53%),
+        radial-gradient(circle at 50% 50%, rgba(188,67,119,.1) 1px, transparent 1.7px);
+    background-size: 72px 72px, 72px 72px, 72px 72px;
+    background-position: 0 0, 0 0, 36px 36px;
+}
