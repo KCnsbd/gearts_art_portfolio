@@ -83,7 +83,6 @@ const artModal = document.getElementById("art-modal");
 const appendixModal = document.getElementById("appendix-modal");
 const appendixModalContent = document.getElementById("appendix-modal-content");
 const modalContent = document.getElementById("modal-content");
-let activeArtwork = null;
 let lastFocusedElement = null;
 let lastFocusedAppendixElement = null;
 
@@ -215,7 +214,6 @@ function renderAppendix() {
 function openArtwork(id, trigger) {
     const artwork = artworks.find((item) => item.id === id);
     if (!artwork) return;
-    activeArtwork = artwork;
     lastFocusedElement = trigger || document.activeElement;
     modalContent.replaceChildren();
 
@@ -257,17 +255,6 @@ function closeArtwork() {
     artModal.hidden = true;
     document.body.classList.remove("modal-active");
     lastFocusedElement?.focus();
-}
-
-function jumpToAppendix() {
-    if (!activeArtwork || activeArtwork.group !== "exploration") return;
-    const target = document.getElementById(`appendix-${activeArtwork.id}`);
-    if (!target) return;
-
-    closeArtwork();
-    history.replaceState(null, "", `#${target.id}`);
-    target.scrollIntoView({ behavior: "smooth", block: "center" });
-    window.setTimeout(() => target.focus({ preventScroll: true }), 350);
 }
 
 function openAppendixModal(id, trigger, fromArtworkModal = false) {
