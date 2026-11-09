@@ -600,3 +600,34 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
     max-height: 55svh;
     object-fit: contain;
 }
+
+
+/* Show the original and revamped Sandbearer screenshots together on its card. */
+.gallery-image-pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: .4rem;
+}
+.gallery-image-pair figure {
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    border-radius: .65rem;
+    background: var(--blush);
+}
+.gallery-image-pair-photo {
+    display: block;
+    width: 100%;
+    height: 210px;
+    object-fit: contain;
+    background: var(--blush);
+}
+.gallery-image-pair figcaption {
+    padding: .35rem .25rem;
+    color: var(--rose-wine);
+    background: white;
+    font-size: .72rem;
+    font-weight: 700;
+    text-align: center;
+}
