@@ -55,6 +55,18 @@ const artworks = [
         medium: "Group Video"
     },
     {
+        id: "kalye-analysis",
+        group: "classwork",
+        src: "assets/class-work/Kalye Analysis.png",
+        title: "Kalye — Gloc-9",
+        description: "Our group analyzed Gloc-9’s “Kalye,” exploring how its lyrics and delivery portray street life and the realities of people whose stories are often overlooked.",
+        workType: "group",
+        contribution: "I was assigned the Observe part of the analysis, assisted in the interpretation, and proofread the whole paper before submission.",
+        members: ["Keana Consebido","Angela Galang","Yzabelle Macalindong","Voltaire Punzalan","Matt Sulit"],
+        medium: "Art Analysis",
+        analysisUrl: "https://drive.google.com/file/d/1zBcCL_IGGEnDi05GADKjaUwDGs9QER6G/view?usp=sharing"
+    },
+    {
         id: "bj",
         group: "exploration",
         src: "assets/art-exploration/BJ.jpeg",
@@ -453,6 +465,16 @@ function openArtwork(id, trigger) {
     if (date) copy.append(date);
     copy.append(description);
     appendArtworkCredits(copy, artwork);
+
+    if (artwork.analysisUrl) {
+        const analysisLink = document.createElement("a");
+        analysisLink.className = "analysis-link";
+        analysisLink.href = artwork.analysisUrl;
+        analysisLink.target = "_blank";
+        analysisLink.rel = "noopener noreferrer";
+        analysisLink.textContent = "Read the full analysis ↗";
+        copy.append(analysisLink);
+    }
 
     if (artwork.group === "exploration") {
         const appendixButton = document.createElement("button");
