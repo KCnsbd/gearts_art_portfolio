@@ -12,16 +12,6 @@ const artworks = [
         medium: "Group Nature Art"
     },
     {
-        id: "researcher-above-the-sea-of-ash",
-        group: "classwork",
-        src: "assets/class-work/Researcher Above the Sea of Ash.jpg",
-        title: "Researcher Above the Sea of Ash",
-        description: "An appropriation of Wanderer above the Sea of Fog, placing me above Taal Volcano as a researcher. It connects my interest in Taal, sparked during my observatory internship, with my current thesis work.",
-        dateLabel: "Created: October 1, 2026",
-        workType: "individual",
-        medium: "AI Appropriation"
-    },
-    {
         id: "validation",
         group: "classwork",
         src: "assets/class-work/VALIDATION YESSSSS.png",
@@ -30,6 +20,29 @@ const artworks = [
         dateLabel: "Created: September 4, 2026",
         workType: "individual",
         medium: "Meme"
+    },
+    {
+        id: "kalye-analysis",
+        group: "classwork",
+        src: "assets/class-work/Kalye Analysis.png",
+        title: "Kalye — Gloc-9",
+        dateLabel: "Created: September 18, 2026",
+        description: "Our group analyzed Gloc-9’s “Kalye,” exploring how its lyrics and delivery portray street life and the realities of people whose stories are often overlooked.",
+        workType: "group",
+        contribution: "I was assigned the Observe part of the analysis, assisted in the interpretation, and proofread the whole paper before submission.",
+        members: ["Keana Consebido","Angela Galang","Yzabelle Macalindong","Voltaire Punzalan","Matt Sulit"],
+        medium: "Art Analysis",
+        analysisUrl: "https://drive.google.com/file/d/1zBcCL_IGGEnDi05GADKjaUwDGs9QER6G/view?usp=sharing"
+    },
+    {
+        id: "researcher-above-the-sea-of-ash",
+        group: "classwork",
+        src: "assets/class-work/Researcher Above the Sea of Ash.jpg",
+        title: "Researcher Above the Sea of Ash",
+        description: "An appropriation of Wanderer above the Sea of Fog, placing me above Taal Volcano as a researcher. It connects my interest in Taal, sparked during my observatory internship, with my current thesis work.",
+        dateLabel: "Created: October 1, 2026",
+        workType: "individual",
+        medium: "AI Appropriation"
     },
     {
         id: "earth-yearns",
@@ -55,17 +68,32 @@ const artworks = [
         medium: "Group Video"
     },
     {
-        id: "kalye-analysis",
-        group: "classwork",
-        src: "assets/class-work/Kalye Analysis.png",
-        title: "Kalye — Gloc-9",
-        dateLabel: "Created: September 18, 2026",
-        description: "Our group analyzed Gloc-9’s “Kalye,” exploring how its lyrics and delivery portray street life and the realities of people whose stories are often overlooked.",
-        workType: "group",
-        contribution: "I was assigned the Observe part of the analysis, assisted in the interpretation, and proofread the whole paper before submission.",
-        members: ["Keana Consebido","Angela Galang","Yzabelle Macalindong","Voltaire Punzalan","Matt Sulit"],
-        medium: "Art Analysis",
-        analysisUrl: "https://drive.google.com/file/d/1zBcCL_IGGEnDi05GADKjaUwDGs9QER6G/view?usp=sharing"
+        id: "sandbearer",
+        group: "exploration",
+        src: "assets/art-exploration/Where the Sandbearer Meets the Sun.png",
+        appendixPreview: "assets/art-exploration/appendix/sandbearer-og-ss.png",
+        title: "Where the Sandbearer Meets the Sun",
+        description: "A 2023 landscape painting revamped in 2026. Returning to the piece let me see how my approach to contrast, value, lighting, and shadow had developed.",
+        dateLabel: "Created: December 27, 2023 · Revamped: September 23, 2026",
+        medium: "Digital Illustration",
+        appendices: [
+            { src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun(og).clip", title: "Original Clip Studio file", download: true },
+            { src: "assets/art-exploration/appendix/sandbearer-og-ss.png", title: "Original layers screenshot" },
+            { src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun (revamp).ipv", title: "Revamped artwork file", download: true },
+            { src: "assets/art-exploration/appendix/sandbearer-revamp-ss.jpg", title: "Revamped layers screenshot" }
+        ]
+    },
+    {
+        id: "we-were-just-children",
+        group: "exploration",
+        src: "assets/art-exploration/We Were Just Children.mp4",
+        title: "We Were Just Children",
+        description: "A 16-second frame-by-frame animation inspired by Peruere and Clervie’s story in Genshin Impact. It contrasts their childhood innocence with the tragic fate waiting for them.",
+        dateLabel: "Created: October 13–15, 2026",
+        medium: "Digital Animation",
+        appendices: [
+            { src: "assets/art-exploration/appendix/children(layers).mp4", title: "Layer Recording" }
+        ]
     },
     {
         id: "bj",
@@ -91,34 +119,6 @@ const artworks = [
         medium: "Felt Craft",
         appendices: [
             { src: "assets/art-exploration/appendix/feltcrafts/document_6307514053791064889.mp4", title: "Timelapse" }
-        ]
-    },
-    {
-        id: "we-were-just-children",
-        group: "exploration",
-        src: "assets/art-exploration/We Were Just Children.mp4",
-        title: "We Were Just Children",
-        description: "A 16-second frame-by-frame animation inspired by Peruere and Clervie’s story in Genshin Impact. It contrasts their childhood innocence with the tragic fate waiting for them.",
-        dateLabel: "Created: October 13–15, 2026",
-        medium: "Digital Animation",
-        appendices: [
-            { src: "assets/art-exploration/appendix/children(layers).mp4", title: "Layer Recording" }
-        ]
-    },
-    {
-        id: "sandbearer",
-        group: "exploration",
-        src: "assets/art-exploration/Where the Sandbearer Meets the Sun.png",
-        appendixPreview: "assets/art-exploration/appendix/sandbearer-og-ss.png",
-        title: "Where the Sandbearer Meets the Sun",
-        description: "A 2023 landscape painting revamped in 2026. Returning to the piece let me see how my approach to contrast, value, lighting, and shadow had developed.",
-        dateLabel: "Created: December 27, 2023 · Revamped: September 23, 2026",
-        medium: "Digital Illustration",
-        appendices: [
-            { src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun(og).clip", title: "Original Clip Studio file", download: true },
-            { src: "assets/art-exploration/appendix/sandbearer-og-ss.png", title: "Original layers screenshot" },
-            { src: "assets/art-exploration/appendix/Where the Sandbearer meets the Sun (revamp).ipv", title: "Revamped artwork file", download: true },
-            { src: "assets/art-exploration/appendix/sandbearer-revamp-ss.jpg", title: "Revamped layers screenshot" }
         ]
     },
     {
