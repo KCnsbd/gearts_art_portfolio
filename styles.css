@@ -433,3 +433,33 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 }
 .contents-section .contents-copy strong { font-size: .92rem; }
 .contents-section .contents-copy small { font-size: .78rem; }
+
+
+/* Center gallery and appendix cards, with three per row on desktop. */
+.artwork-grid, .appendix-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.artwork-grid {
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+.artwork-card, .appendix-card {
+    flex: 0 1 calc((100% - 3rem) / 3);
+    max-width: 360px;
+}
+.appendix-grid {
+    gap: clamp(1rem, 3vw, 2rem);
+}
+@media (max-width: 850px) {
+    .artwork-card, .appendix-card {
+        flex-basis: calc((100% - 1.5rem) / 2);
+    }
+}
+@media (max-width: 760px) {
+    .artwork-grid, .appendix-grid { gap: 1rem; }
+    .artwork-card, .appendix-card {
+        flex-basis: 100%;
+        max-width: 520px;
+    }
+}
