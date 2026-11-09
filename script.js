@@ -174,21 +174,33 @@ function createPhotoSlideshow(photos, title, className, interactive = false) {
     slideshow.className = `photo-slideshow ${className}`;
     slideshow.setAttribute("aria-label", `${title} photo slideshow`);
 
-    const image = document.createElement("img");
-    image.className = "slideshow-photo";
-    image.src = photos[0];
-    image.alt = `${title}, photo 1 of ${photos.length}`;
-    image.loading = interactive ? "eager" : "lazy";
-    slideshow.append(image);
+    const track = document.createElement("div");
+    track.className = "slideshow-track";
+    const slides = photos.map((src, index) => {
+        const image = document.createElement("img");
+        image.className = "slideshow-photo";
+        image.src = src;
+        image.alt = `${title}, photo ${index + 1} of ${photos.length}`;
+        image.loading = interactive || index === 0 ? "eager" : "lazy";
+        track.append(image);
+        return image;
+    });
+    slideshow.append(track);
 
     let currentIndex = 0;
     const updatePhoto = (step) => {
         currentIndex = (currentIndex + step + photos.length) % photos.length;
-        image.src = photos[currentIndex];
-        image.alt = `${title}, photo ${currentIndex + 1} of ${photos.length}`;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
         const counter = slideshow.querySelector(".slideshow-counter");
         if (counter) counter.textContent = `${currentIndex + 1} / ${photos.length}`;
+        slides.forEach((image, index) => {
+            image.setAttribute("aria-hidden", String(index !== currentIndex));
+        });
     };
+
+    slides.forEach((image, index) => {
+        image.setAttribute("aria-hidden", String(index !== 0));
+    });
 
     if (interactive) {
         slideshow.classList.add("is-interactive");
