@@ -784,3 +784,10 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
     outline: 2px solid var(--berry);
     outline-offset: 2px;
 }
+
+
+.hero-section .main-title {
+    font-size: clamp(2.35rem, 7.2vw, 6.2rem);
+    line-height: 1.04;
+}
+.hero-section .main-title span { display: block; }
