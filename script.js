@@ -59,6 +59,7 @@ const artworks = [
         group: "classwork",
         src: "assets/class-work/Kalye Analysis.png",
         title: "Kalye — Gloc-9",
+        dateLabel: "Created: September 18, 2026",
         description: "Our group analyzed Gloc-9’s “Kalye,” exploring how its lyrics and delivery portray street life and the realities of people whose stories are often overlooked.",
         workType: "group",
         contribution: "I was assigned the Observe part of the analysis, assisted in the interpretation, and proofread the whole paper before submission.",
