@@ -8,6 +8,7 @@ const artworks = [
         dateLabel: "Created: July 31, 2026",
         contribution: "I helped conceptualize the design, gathered materials, and presented the final output, explaining its meaning.",
         members: ["Keana Consebido","Angela Galang","Yzabelle Macalindong","Voltaire Punzalan","Ernest Villareal","Tauries Maestre","Angel Rafols","Angela Reano","Hector Torralba"],
+        workType: "group",
         medium: "Group Nature Art"
     },
     {
@@ -17,6 +18,7 @@ const artworks = [
         title: "Researcher Above the Sea of Ash",
         description: "An appropriation of Wanderer above the Sea of Fog, placing me above Taal Volcano as a researcher. It connects my interest in Taal, sparked during my observatory internship, with my current thesis work.",
         dateLabel: "Created: October 1, 2026",
+        workType: "individual",
         medium: "AI Appropriation"
     },
     {
@@ -26,6 +28,7 @@ const artworks = [
         title: "VALIDATION YASSSS",
         description: "Inspired by a moment in class when my answer was complimented, this meme celebrates the joy of getting words of affirmation.",
         dateLabel: "Created: September 4, 2026",
+        workType: "individual",
         medium: "Meme"
     },
     {
@@ -35,6 +38,7 @@ const artworks = [
         title: "The Earth Yearns for the Heavens",
         description: "My colored reinterpretation of The Creation of Adam depicts the earth as a branch-wrapped hand reaching toward the heavens for salvation. It was my first successful attempt at acrylic painting.",
         dateLabel: "Created: October 2, 2026",
+        workType: "individual",
         medium: "Acrylic Painting"
     },
     {
@@ -47,6 +51,7 @@ const artworks = [
         dateLabel: "Created: October 9, 2026",
         contribution: "I helped brainstorm the shots, filmed some of the clips, and generated the music for the video.",
         members: ["Keana Consebido","Tauries Maestre","Kriztan Sumbillo","Daniel De Lara"],
+        workType: "group",
         medium: "Group Video"
     },
     {
@@ -262,6 +267,44 @@ function createDateLabel(artwork) {
     return date;
 }
 
+function createClassworkFilter(grid) {
+    const filterBar = document.createElement("div");
+    filterBar.className = "work-filter";
+    filterBar.setAttribute("role", "group");
+    filterBar.setAttribute("aria-label", "Filter classwork by collaboration type");
+
+    const filters = [
+        { value: "all", label: "All Works" },
+        { value: "group", label: "Group Works" },
+        { value: "individual", label: "Individual Works" }
+    ];
+
+    filters.forEach(({ value, label }, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "work-filter-button";
+        button.textContent = label;
+        button.dataset.filter = value;
+        button.setAttribute("aria-pressed", String(index === 0));
+        if (index === 0) button.classList.add("is-active");
+
+        button.addEventListener("click", () => {
+            filterBar.querySelectorAll(".work-filter-button").forEach((filter) => {
+                const isActive = filter === button;
+                filter.classList.toggle("is-active", isActive);
+                filter.setAttribute("aria-pressed", String(isActive));
+            });
+            grid.querySelectorAll(".artwork-card").forEach((card) => {
+                card.hidden = value !== "all" && card.dataset.workType !== value;
+            });
+        });
+
+        filterBar.append(button);
+    });
+
+    return filterBar;
+}
+
 function renderGallery() {
     if (!gallery) return;
     const sections = [
@@ -286,12 +329,14 @@ function renderGallery() {
 
         const grid = document.createElement("div");
         grid.className = "artwork-grid";
+        const filterBar = key === "classwork" ? createClassworkFilter(grid) : null;
         artworks.filter((artwork) => artwork.group === key).forEach((artwork) => {
             const card = document.createElement("article");
             card.className = "artwork-card";
             card.setAttribute("role", "button");
             card.tabIndex = 0;
             card.setAttribute("aria-label", `Open details for ${artwork.title}`);
+            if (artwork.workType) card.dataset.workType = artwork.workType;
 
             const mediaWrap = document.createElement("div");
             mediaWrap.className = "artwork-media-wrap";
@@ -304,6 +349,11 @@ function renderGallery() {
             const medium = document.createElement("p");
             medium.className = "medium-text";
             medium.textContent = `${artwork.medium}`;
+            const workTypeLabel = artwork.workType ? document.createElement("p") : null;
+            if (workTypeLabel) {
+                workTypeLabel.className = `work-type-label work-type-${artwork.workType}`;
+                workTypeLabel.textContent = artwork.workType === "group" ? "Group work" : "Individual work";
+            }
             const date = createDateLabel(artwork);
 
             const description = document.createElement("p");
@@ -316,6 +366,7 @@ function renderGallery() {
             readMore.setAttribute("aria-hidden", "true");
 
             card.append(mediaWrap, caption, medium);
+            if (workTypeLabel) card.append(workTypeLabel);
             if (date) card.append(date);
             card.append(description, readMore);
             card.addEventListener("click", () => openArtwork(artwork.id, card));
@@ -329,7 +380,9 @@ function renderGallery() {
             grid.append(card);
         });
 
-        group.append(heading, grid);
+        group.append(heading);
+        if (filterBar) group.append(filterBar);
+        group.append(grid);
         gallery.append(group);
     });
 }
