@@ -714,3 +714,51 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 @media (max-width: 520px) {
     .artwork-credits ul { grid-template-columns: 1fr; }
 }
+
+
+/* Filter the classwork gallery by group or individual work. */
+.work-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .7rem;
+    margin: 1.7rem auto 1.9rem;
+}
+.work-filter-button {
+    min-width: 132px;
+    padding: .75rem 1.3rem;
+    border: 1px solid rgba(188, 67, 119, .24);
+    border-radius: 999px;
+    color: var(--rose-wine);
+    background: white;
+    font: 600 1rem 'Quicksand', sans-serif;
+    cursor: pointer;
+    transition: color .2s ease, background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.work-filter-button:hover {
+    transform: translateY(-2px);
+    border-color: var(--berry);
+}
+.work-filter-button.is-active {
+    border-color: var(--berry);
+    color: white;
+    background: var(--berry);
+    box-shadow: 0 8px 20px rgba(188, 67, 119, .22);
+}
+.work-filter-button:focus-visible {
+    outline: 3px solid rgba(188, 67, 119, .36);
+    outline-offset: 3px;
+}
+.artwork-card[hidden] { display: none; }
+.work-type-label {
+    margin: .1rem .35rem .35rem;
+    color: var(--berry);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+@media (max-width: 520px) {
+    .work-filter { gap: .5rem; }
+    .work-filter-button { min-width: 0; flex: 1 1 100%; }
+}
