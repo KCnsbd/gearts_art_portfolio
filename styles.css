@@ -762,3 +762,25 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
     .work-filter { gap: .5rem; }
     .work-filter-button { min-width: 0; flex: 1 1 100%; }
 }
+
+
+.analysis-link {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    margin-top: .9rem;
+    padding: .8rem 1.15rem;
+    border-radius: 999px;
+    color: white;
+    background: var(--berry);
+    font-weight: 700;
+    text-decoration: none;
+    transition: background .2s ease, transform .2s ease;
+}
+.analysis-link:hover, .analysis-link:focus-visible {
+    transform: translateY(-2px);
+    color: white;
+    background: var(--rose-wine);
+    outline: 2px solid var(--berry);
+    outline-offset: 2px;
+}
