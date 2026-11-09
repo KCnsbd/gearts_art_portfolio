@@ -185,9 +185,6 @@ function renderAppendix() {
         const card = document.createElement("article");
         card.id = `appendix-${artwork.id}`;
         card.className = "appendix-card";
-        card.setAttribute("role", "button");
-        card.tabIndex = 0;
-        card.setAttribute("aria-label", `Open appendix for ${artwork.title}`);
 
         const media = createMedia(artwork.src, artwork.title, "appendix-card-media");
         const title = document.createElement("h3");
@@ -211,13 +208,6 @@ function renderAppendix() {
 
         card.append(media, title, medium, description, readMore);
         card.addEventListener("click", () => openAppendixModal(artwork.id, card));
-        card.addEventListener("keydown", (event) => {
-            if (event.target !== card) return;
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                openAppendixModal(artwork.id, card);
-            }
-        });
         appendixGrid.append(card);
     });
 }
