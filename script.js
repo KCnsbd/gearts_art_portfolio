@@ -110,12 +110,13 @@ function createMedia(src, title, className, controls = false) {
 function renderGallery() {
     if (!gallery) return;
     const sections = [
-        { key: "classwork", title: "Classwork", note: "Pieces created for GEARTS+ activities." },
-        { key: "exploration", title: "Art Exploration", note: "Personal pieces and experiments beyond class assignments." }
+        { key: "classwork", id: "part-one", title: "Part I | My Art Appreciation Journey", note: "GEARTS+ outputs gathered into a curated exhibition." },
+        { key: "exploration", id: "part-two", title: "Part II | My Artistic Exploration", note: "New work, unfamiliar forms, and creative experiments." }
     ];
 
-    sections.forEach(({ key, title, note }) => {
+    sections.forEach(({ key, id, title, note }) => {
         const group = document.createElement("section");
+        group.id = id;
         group.className = `gallery-group gallery-group-${key}`;
         group.setAttribute("aria-labelledby", `gallery-${key}-title`);
 
