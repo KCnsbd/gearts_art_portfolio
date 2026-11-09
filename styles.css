@@ -226,3 +226,46 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 @media (max-width: 760px) {
     .contents-list { display: block; }
 }
+
+
+/* Reorder the portrait and contents list in the About layout. */
+.about-container { grid-template-areas: "contents bio portrait"; }
+.contents-nav { grid-area: contents; }
+.about-text { grid-area: bio; }
+.about-photo-wrap { grid-area: portrait; }
+@media (max-width: 850px) {
+    .about-container {
+        grid-template-columns: minmax(0, 1fr) minmax(180px, .85fr);
+        grid-template-areas: "contents portrait" "bio bio";
+    }
+    .contents-nav { grid-column: auto; }
+}
+@media (max-width: 760px) {
+    .about-container {
+        grid-template-columns: 1fr;
+        grid-template-areas: "contents" "portrait" "bio";
+    }
+}
+
+/* Gentle, playful image hover motion. */
+.about-photo, .artwork-media, .appendix-card-media {
+    transform: scale(1);
+    transition: transform .45s cubic-bezier(.2,.8,.2,1), filter .45s ease;
+}
+.about-photo-wrap, .artwork-media-wrap { transition: box-shadow .3s ease; }
+.about-photo-wrap:hover { box-shadow: 0 12px 32px rgba(188, 67, 119, .22); }
+.about-photo-wrap:hover .about-photo { transform: scale(1.055); filter: saturate(1.08); }
+.artwork-card, .appendix-card { cursor: pointer; transition: transform .25s ease, box-shadow .25s ease; }
+.artwork-card:hover .artwork-media, .artwork-card:focus-visible .artwork-media,
+.appendix-card:hover .appendix-card-media, .appendix-card:focus-visible .appendix-card-media {
+    transform: scale(1.045);
+    filter: saturate(1.08);
+}
+.artwork-card:hover, .appendix-card:hover { transform: translateY(-4px); box-shadow: 0 15px 36px rgba(143, 49, 93, .17); }
+.appendix-card { overflow: hidden; }
+.read-more-button { display: inline-block; }
+@media (prefers-reduced-motion: reduce) {
+    .about-photo, .artwork-media, .appendix-card-media, .about-photo-wrap, .artwork-media-wrap, .artwork-card, .appendix-card {
+        transition: none;
+    }
+}
