@@ -4,15 +4,19 @@ const artworks = [
         group: "classwork",
         src: "assets/class-work/beauty is balance.jpg",
         title: "Beauty Is Balance",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Nature Art"
+        description: "Our group arranged natural materials into a yin-yang symbol to represent balance and unity between opposing forces, and the beauty found in both.",
+        dateLabel: "Created: July 31, 2026",
+        contribution: "I helped conceptualize the design, gathered materials, and presented the final output, explaining its meaning.",
+        members: ["Keana Consebido","Angela Galang","Yzabelle Macalindong","Voltaire Punzalan","Ernest Villareal","Tauries Maestre","Angel Rafols","Angela Reano","Hector Torralba"],
+        medium: "Group Nature Art"
     },
     {
         id: "researcher-above-the-sea-of-ash",
         group: "classwork",
         src: "assets/class-work/Researcher Above the Sea of Ash.jpg",
         title: "Researcher Above the Sea of Ash",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "An appropriation of Wanderer above the Sea of Fog, placing me above Taal Volcano as a researcher. It connects my interest in Taal, sparked during my observatory internship, with my current thesis work.",
+        dateLabel: "Created: October 1, 2026",
         medium: "AI Appropriation"
     },
     {
@@ -20,7 +24,8 @@ const artworks = [
         group: "classwork",
         src: "assets/class-work/VALIDATION YESSSSS.png",
         title: "VALIDATION YASSSS",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "Inspired by a moment in class when my answer was complimented, this meme celebrates the joy of getting words of affirmation.",
+        dateLabel: "Created: September 4, 2026",
         medium: "Meme"
     },
     {
@@ -28,7 +33,8 @@ const artworks = [
         group: "classwork",
         src: "assets/class-work/the-earth-yearns-for-the-heavens.jpg",
         title: "The Earth Yearns for the Heavens",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        description: "My colored reinterpretation of The Creation of Adam depicts the earth as a branch-wrapped hand reaching toward the heavens for salvation. It was my first successful attempt at acrylic painting.",
+        dateLabel: "Created: October 2, 2026",
         medium: "Acrylic Painting"
     },
     {
@@ -36,8 +42,12 @@ const artworks = [
         group: "classwork",
         src: "assets/class-work/wonder.mp4",
         title: "Wonder",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        medium: "Videography"
+        description: "A group video exploring wonder through the joy of romanticizing the mundane. As Sync-O, we turn everyday moments into something worth noticing, finding small sparks of beauty and surprise in ordinary life.",
+        groupName: "Sync-O",
+        dateLabel: "Created: October 9, 2026",
+        contribution: "I helped brainstorm the shots, filmed some of the clips, and generated the music for the video.",
+        members: ["Keana Consebido","Tauries Maestre","Kriztan Sumbillo","Daniel De Lara"],
+        medium: "Group Video"
     },
     {
         id: "bj",
@@ -206,6 +216,42 @@ function createPhotoSlideshow(photos, title, className, interactive = false) {
     return slideshow;
 }
 
+function appendArtworkCredits(container, artwork) {
+    if (!artwork.groupName && !artwork.contribution && !artwork.members?.length) return;
+
+    const credits = document.createElement("section");
+    credits.className = "artwork-credits";
+
+    if (artwork.groupName) {
+        const group = document.createElement("p");
+        group.className = "artwork-group-name";
+        group.innerHTML = `<strong>Group:</strong> ${artwork.groupName}`;
+        credits.append(group);
+    }
+
+    if (artwork.contribution) {
+        const contributionHeading = document.createElement("h3");
+        contributionHeading.textContent = "My contribution";
+        const contribution = document.createElement("p");
+        contribution.textContent = artwork.contribution;
+        credits.append(contributionHeading, contribution);
+    }
+
+    if (artwork.members?.length) {
+        const membersHeading = document.createElement("h3");
+        membersHeading.textContent = "Group members";
+        const members = document.createElement("ul");
+        artwork.members.forEach((name) => {
+            const item = document.createElement("li");
+            item.textContent = name;
+            members.append(item);
+        });
+        credits.append(membersHeading, members);
+    }
+
+    container.append(credits);
+}
+
 function createDateLabel(artwork) {
     if (!artwork.dateLabel) return null;
     const date = document.createElement("p");
@@ -351,6 +397,7 @@ function openArtwork(id, trigger) {
     copy.append(eyebrow, heading);
     if (date) copy.append(date);
     copy.append(description);
+    appendArtworkCredits(copy, artwork);
 
     if (artwork.group === "exploration") {
         const appendixButton = document.createElement("button");
