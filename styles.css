@@ -576,3 +576,27 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
 @media (prefers-reduced-motion: reduce) {
     .slideshow-arrow { transition: none; }
 }
+
+
+/* Let each slide use its own original image ratio. */
+.gallery-photo-slideshow {
+    height: auto;
+    aspect-ratio: auto;
+}
+.gallery-photo-slideshow .slideshow-photo {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+}
+.modal-photo-slideshow {
+    height: auto;
+    aspect-ratio: auto;
+}
+.modal-photo-slideshow .slideshow-photo {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 55svh;
+    object-fit: contain;
+}
