@@ -528,7 +528,7 @@ function openArtwork(id, trigger) {
     heading.textContent = artwork.title;
     const date = createDateLabel(artwork);
     const description = document.createElement("p");
-    description.textContent = artwork.description;
+    description.append(...createDescriptionNodes(artwork));
     copy.append(eyebrow, heading);
     if (date) copy.append(date);
     copy.append(description);
