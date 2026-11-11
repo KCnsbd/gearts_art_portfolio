@@ -331,6 +331,7 @@ function createDescriptionNodes(artwork) {
         anchor.target = "_blank";
         anchor.rel = "noopener noreferrer";
         anchor.textContent = matchedLink.text;
+        anchor.addEventListener("click", (event) => event.stopPropagation());
         nodes.push(anchor);
         remaining = remaining.slice(matchIndex + matchedLink.text.length);
     }
