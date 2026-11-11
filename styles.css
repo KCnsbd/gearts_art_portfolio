@@ -870,3 +870,19 @@ footer p { margin: .35rem 0 0; font-size: .82rem; }
     background-size: 72px 72px, 72px 72px, 72px 72px;
     background-position: 0 0, 0 0, 36px 36px;
 }
+
+
+/* Links embedded in artwork descriptions use the portfolio's pink accent. */
+.description-link {
+    color: var(--berry);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: rgba(188, 67, 119, .5);
+    text-underline-offset: .15em;
+    transition: color .18s ease, text-decoration-color .18s ease;
+}
+.description-link:hover,
+.description-link:focus-visible {
+    color: var(--rose-wine);
+    text-decoration-color: currentColor;
+}
