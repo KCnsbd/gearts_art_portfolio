@@ -40,6 +40,7 @@ const artworks = [
         src: "assets/class-work/Researcher Above the Sea of Ash.jpg",
         title: "Researcher Above the Sea of Ash",
         description: "An appropriation of Wanderer above the Sea of Fog, placing me above Taal Volcano as a researcher. It connects my interest in Taal, sparked during my observatory internship, with my current thesis work.",
+        descriptionLinks: [{ text: "Wanderer above the Sea of Fog", url: "https://www.hamburger-kunsthalle.de/en/news/wanderer-above-sea-fog-caspar-david-friedrich" }],
         dateLabel: "Created: October 1, 2026",
         workType: "individual",
         medium: "AI Appropriation"
@@ -50,6 +51,7 @@ const artworks = [
         src: "assets/class-work/the-earth-yearns-for-the-heavens.jpg",
         title: "The Earth Yearns for the Heavens",
         description: "My colored reinterpretation of The Creation of Adam depicts the earth as a branch-wrapped hand reaching toward the heavens for salvation. Despite being a self-proclaimed art girly, I had no prior experience working with acrylics, since I am mostly a digital artist, so I was really nervous if I could pull it off. Needless to say, I'm quite proud of how this turned out. I love coloring skin digitally, I'm glad I could translate it effectively with paper and paint too.",
+        descriptionLinks: [{ text: "The Creation of Adam", url: "https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/cappella-sistina/volta/storie-centrali/creazione-di-adamo.html" }],
         dateLabel: "Created: October 2, 2026",
         workType: "individual",
         medium: "Acrylic Painting"
@@ -125,6 +127,7 @@ const artworks = [
         src: "assets/art-exploration/BJ.jpeg",
         title: "BJ",
         description: "A hand-sewn Snorlax felt charm made as a birthday gift for a friend. Every detail, including the face and initials, was sewn by hand without glue. It's basically tradition for our friend group to give each other gifts for our birthdays, and I wanted to make something that was both cute and personal. I chose Snorlax because it's one of our friend loves Pokémon, and I added the initials to make it extra special.",
+        descriptionLinks: [{ text: "Pokémon", url: "https://www.pokemon.com/us/pokedex/" }],
         dateLabel: "Created: November 2, 2026",
         medium: "Felt Craft",
         appendices: [
