@@ -106,7 +106,12 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/We Were Just Children.mp4",
         title: "We Were Just Children",
-        description: "A 16-second frame-by-frame animation based on Peruere and Clervie’s story in Genshin Impact. It contrasts their childhood innocence with the tragic fate waiting for them. It is also inspired by the <a href=\"https://youtu.be/rrngM9DmDfk?si=xVBXg-gtCCiAztBW&t=185\" target=\"_blank\" rel=\"noopener noreferrer\">Wiege</a> music video from the Alien Stage series. I am a big fan of both Genshin Impact and the Alien Stage series, so I wanted to create a short animation that combines elements from both. This was my first time doing frame-by-frame animation, and it was a challenging but rewarding experience. I learned a lot about timing, spacing, and how to convey emotion through movement.",
+        description: "A 16-second frame-by-frame animation based on Peruere and Clervie’s story in Genshin Impact. It contrasts their childhood innocence with the tragic fate waiting for them. It is also inspired by the Wiege music video from the Alien Stage series. I am a big fan of both Genshin Impact and the Alien Stage series, so I wanted to create a short animation that combines elements from both. This was my first time doing frame-by-frame animation, and it was a challenging but rewarding experience. I learned a lot about timing, spacing, and how to convey emotion through movement.",
+        descriptionLinks: [
+            { text: "Genshin Impact", url: "https://genshin.hoyoverse.com/en/" },
+            { text: "Wiege", url: "https://youtu.be/rrngM9DmDfk?si=xVBXg-gtCCiAztBW&t=185" },
+            { text: "Alien Stage", url: "https://www.youtube.com/playlist?list=PLQ-JZOYFII4dHqeSu6yeGj-30sZohX_oX" }
+        ],
         dateLabel: "Created: October 13–15, 2026",
         medium: "Digital Animation",
         sourceFileUrl: "https://drive.google.com/file/d/1vz4iUton_SScqp5WNIstX9U06YLrvlaE/view?usp=sharing",
@@ -152,6 +157,9 @@ const artworks = [
         ],
         title: "A Quiet Corner of Stories",
         description: "A set of photographs taken at Paperback & Lattes, capturing the café’s vintage, dark-academia atmosphere during a birthday visit with my sister. She just adores old, vintage aesthetic. She's what you'd call an \"old soul\" She especially appreciated the record player and the bookshelves. Her birthday was a great excuse to visit the café and take some photos. I wanted to capture the cozy, nostalgic vibe of the place, and I think these photos do just that. I hope they bring a little bit of that warmth and charm to anyone who sees them.",
+        descriptionLinks: [
+            { text: "Paperback & Lattes", url: "https://www.facebook.com/p/Paperback-Lattes-61558494582155/" }
+        ],
         dateLabel: "Taken: November 3, 2026",
         medium: "Photography",
         appendices: [
@@ -291,6 +299,31 @@ function appendArtworkCredits(container, artwork) {
     container.append(credits);
 }
 
+function createDescriptionNodes(artwork) {
+    const text = artwork.description || "";
+    const links = [...(artwork.descriptionLinks || [])].sort((a, b) => b.text.length - a.text.length);
+    if (!links.length) return [document.createTextNode(text)];
+
+    const escapedLabels = links.map(({ text: label }) => label.replace(/[.*+?^${}()|[\]\\]/g, "\\function createDateLabel(artwork) {"));
+    const pattern = new RegExp(escapedLabels.join("|"), "g");
+    const nodes = [];
+    let cursor = 0;
+    for (const match of text.matchAll(pattern)) {
+        if (match.index > cursor) nodes.push(document.createTextNode(text.slice(cursor, match.index)));
+        const link = links.find(({ text: label }) => label === match[0]);
+        const anchor = document.createElement("a");
+        anchor.className = "description-link";
+        anchor.href = link.url;
+        anchor.target = "_blank";
+        anchor.rel = "noopener noreferrer";
+        anchor.textContent = match[0];
+        nodes.push(anchor);
+        cursor = match.index + match[0].length;
+    }
+    if (cursor < text.length) nodes.push(document.createTextNode(text.slice(cursor)));
+    return nodes;
+}
+
 function createDateLabel(artwork) {
     if (!artwork.dateLabel) return null;
     const date = document.createElement("p");
@@ -390,7 +423,7 @@ function renderGallery() {
 
             const description = document.createElement("p");
             description.className = "card-description";
-            description.textContent = artwork.description;
+            description.append(...createDescriptionNodes(artwork));
 
             const readMore = document.createElement("span");
             readMore.className = "read-more-button";
