@@ -4,7 +4,7 @@ const artworks = [
         group: "classwork",
         src: "assets/class-work/beauty is balance.jpg",
         title: "Beauty Is Balance",
-        description: "Our group arranged natural materials into a yin-yang symbol to represent balance and unity between opposing forces, and the beauty found in both.",
+        description: "Our group arranged natural materials into a yin-yang symbol to represent balance and unity between opposing forces, and the beauty found in both. Although we encountered a minor conflict with the other group forming a neater yin-yang symbol, we each had our own interpretation of the concept and were able to express our message in our own ways.",
         dateLabel: "Created: July 31, 2026",
         contribution: "I helped conceptualize the design, gathered materials, and presented the final output, explaining its meaning.",
         members: ["Keana Consebido","Angela Galang","Yzabelle Macalindong","Voltaire Punzalan","Ernest Villareal","Tauries Maestre","Angel Rafols","Angela Reano","Hector Torralba"],
@@ -49,7 +49,7 @@ const artworks = [
         group: "classwork",
         src: "assets/class-work/the-earth-yearns-for-the-heavens.jpg",
         title: "The Earth Yearns for the Heavens",
-        description: "My colored reinterpretation of The Creation of Adam depicts the earth as a branch-wrapped hand reaching toward the heavens for salvation. It was my first successful attempt at acrylic painting.",
+        description: "My colored reinterpretation of The Creation of Adam depicts the earth as a branch-wrapped hand reaching toward the heavens for salvation. Despite being a self-proclaimed art girly, I had no prior experience working with acrylics, since I am mostly a digital artist, so I was really nervous if I could pull it off. Needless to say, I'm quite proud of how this turned out. I love coloring skin digitally, I'm glad I could translate it effectively with paper and paint too.",
         dateLabel: "Created: October 2, 2026",
         workType: "individual",
         medium: "Acrylic Painting"
@@ -73,7 +73,7 @@ const artworks = [
         src: "assets/art-exploration/Where the Sandbearer Meets the Sun.png",
         appendixPreview: "assets/art-exploration/appendix/sandbearer-og-ss.png",
         title: "Where the Sandbearer Meets the Sun",
-        description: "A 2023 landscape painting revamped in 2026. Returning to the piece let me see how my approach to contrast, value, lighting, and shadow had developed.",
+        description: "A 2023 landscape painting revamped in 2026. This was my first attempt at painting backgrounds back then. I remember being so proud of this. Now, looking back, I can see how much I've improved since then. I wanted to revisit this piece and apply what I've learned in the past three years to make it better.",
         dateLabel: "Created: December 27, 2023 · Revamped: September 23, 2026",
         medium: "Digital Illustration",
         appendixGroups: [
@@ -106,7 +106,7 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/We Were Just Children.mp4",
         title: "We Were Just Children",
-        description: "A 16-second frame-by-frame animation inspired by Peruere and Clervie’s story in Genshin Impact. It contrasts their childhood innocence with the tragic fate waiting for them.",
+        description: "A 16-second frame-by-frame animation based on Peruere and Clervie’s story in Genshin Impact. It contrasts their childhood innocence with the tragic fate waiting for them. It is also inspired by the <a href=\"https://youtu.be/rrngM9DmDfk?si=xVBXg-gtCCiAztBW&t=185\" target=\"_blank\" rel=\"noopener noreferrer\">Wiege</a> music video from the Alien Stage series. I am a big fan of both Genshin Impact and the Alien Stage series, so I wanted to create a short animation that combines elements from both. This was my first time doing frame-by-frame animation, and it was a challenging but rewarding experience. I learned a lot about timing, spacing, and how to convey emotion through movement.",
         dateLabel: "Created: October 13–15, 2026",
         medium: "Digital Animation",
         sourceFileUrl: "https://drive.google.com/file/d/1vz4iUton_SScqp5WNIstX9U06YLrvlaE/view?usp=sharing",
@@ -119,13 +119,13 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/BJ.jpeg",
         title: "BJ",
-        description: "A hand-sewn Snorlax felt charm made as a birthday gift for a friend. Every detail, including the face and initials, was sewn by hand without glue.",
+        description: "A hand-sewn Snorlax felt charm made as a birthday gift for a friend. Every detail, including the face and initials, was sewn by hand without glue. It's basically tradition for our friend group to give each other gifts for our birthdays, and I wanted to make something that was both cute and personal. I chose Snorlax because it's one of our friend loves Pokémon, and I added the initials to make it extra special.",
         dateLabel: "Created: November 2, 2026",
         medium: "Felt Craft",
         appendices: [
             { src: "assets/art-exploration/appendix/feltcrafts/materials.jpg", title: "Materials" },
-            { src: "assets/art-exploration/appendix/feltcrafts/process1.jpg", title: "Process · 1" },
-            { src: "assets/art-exploration/appendix/feltcrafts/process2.jpg", title: "Process · 2" }
+            { src: "assets/art-exploration/appendix/feltcrafts/process1.jpg", title: "Traced" },
+            { src: "assets/art-exploration/appendix/feltcrafts/process2.jpg", title: "Cut outs" }
         ]
     },
     {
@@ -133,7 +133,7 @@ const artworks = [
         group: "exploration",
         src: "assets/art-exploration/Felt Doll.jpg",
         title: "My Love Language",
-        description: "A handmade felt doll for my sister’s birthday, created to turn a familiar digital gift into a new kind of handmade keepsake.",
+        description: "A handmade felt doll for my sister’s birthday, created to turn a familiar digital gift into a new kind of handmade keepsake. Every year, I draw my sister a digital chibi illustration of her favorite K-pop idol, and this year, I wanted to make something more tangible. I decided to turn her into a felt doll. I hand-sewed every detail, from the hair to the outfit, and even her face. It was a labor of love, and I hope she treasures it as much as I enjoyed making it. As an art girly, I can truly say that making handmade gifts is one of my favorite ways to show love and appreciation for the people I care about.",
         dateLabel: "Created: November 3, 2026",
         medium: "Felt Craft",
         appendices: [
@@ -151,14 +151,14 @@ const artworks = [
             "assets/art-exploration/A Quiet Corner of Stories/4.jpg"
         ],
         title: "A Quiet Corner of Stories",
-        description: "A set of photographs taken at Paperback & Lattes, capturing the café’s vintage, dark-academia atmosphere during a birthday visit with my sister.",
+        description: "A set of photographs taken at Paperback & Lattes, capturing the café’s vintage, dark-academia atmosphere during a birthday visit with my sister. She just adores old, vintage aesthetic. She's what you'd call an \"old soul\" She especially appreciated the record player and the bookshelves. Her birthday was a great excuse to visit the café and take some photos. I wanted to capture the cozy, nostalgic vibe of the place, and I think these photos do just that. I hope they bring a little bit of that warmth and charm to anyone who sees them.",
         dateLabel: "Taken: November 3, 2026",
         medium: "Photography",
         appendices: [
-            { src: "assets/art-exploration/appendix/photography/raw1.jpg", title: "Original photo · 1" },
-            { src: "assets/art-exploration/appendix/photography/raw2.jpg", title: "Original photo · 2" },
-            { src: "assets/art-exploration/appendix/photography/raw3.jpg", title: "Original photo · 3" },
-            { src: "assets/art-exploration/appendix/photography/raw4.jpg", title: "Original photo · 4" },
+            { src: "assets/art-exploration/appendix/photography/raw1.jpg", title: "Raw photo · 1" },
+            { src: "assets/art-exploration/appendix/photography/raw2.jpg", title: "Raw photo · 2" },
+            { src: "assets/art-exploration/appendix/photography/raw3.jpg", title: "Raw photo · 3" },
+            { src: "assets/art-exploration/appendix/photography/raw4.jpg", title: "Raw photo · 4" },
             { src: "assets/art-exploration/appendix/photography/lightroom-ss.jpg", title: "Lightroom editing screenshot" }
         ]
     }
