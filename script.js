@@ -302,25 +302,35 @@ function appendArtworkCredits(container, artwork) {
 function createDescriptionNodes(artwork) {
     const text = artwork.description || "";
     const links = [...(artwork.descriptionLinks || [])].sort((a, b) => b.text.length - a.text.length);
-    if (!links.length) return [document.createTextNode(text)];
-
-    const escapedLabels = links.map(({ text: label }) => label.replace(/[.*+?^${}()|[\]\\]/g, "\\function createDateLabel(artwork) {"));
-    const pattern = new RegExp(escapedLabels.join("|"), "g");
     const nodes = [];
-    let cursor = 0;
-    for (const match of text.matchAll(pattern)) {
-        if (match.index > cursor) nodes.push(document.createTextNode(text.slice(cursor, match.index)));
-        const link = links.find(({ text: label }) => label === match[0]);
+    let remaining = text;
+
+    while (remaining.length) {
+        let matchIndex = -1;
+        let matchedLink = null;
+        links.forEach((link) => {
+            const index = remaining.indexOf(link.text);
+            if (index !== -1 && (matchIndex === -1 || index < matchIndex)) {
+                matchIndex = index;
+                matchedLink = link;
+            }
+        });
+
+        if (!matchedLink) {
+            nodes.push(document.createTextNode(remaining));
+            break;
+        }
+        if (matchIndex > 0) nodes.push(document.createTextNode(remaining.slice(0, matchIndex)));
+
         const anchor = document.createElement("a");
         anchor.className = "description-link";
-        anchor.href = link.url;
+        anchor.href = matchedLink.url;
         anchor.target = "_blank";
         anchor.rel = "noopener noreferrer";
-        anchor.textContent = match[0];
+        anchor.textContent = matchedLink.text;
         nodes.push(anchor);
-        cursor = match.index + match[0].length;
+        remaining = remaining.slice(matchIndex + matchedLink.text.length);
     }
-    if (cursor < text.length) nodes.push(document.createTextNode(text.slice(cursor)));
     return nodes;
 }
 
